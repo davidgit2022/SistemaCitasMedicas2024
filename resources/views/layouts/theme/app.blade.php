@@ -18,7 +18,7 @@
         @include('layouts.theme.partials.navbar')
         <!-- End Navbar -->
         <!-- Header -->
-        {{-- @include('layouts.theme.partials.header') --}}
+        @include('layouts.theme.partials.header')
         <div class="container-fluid mt--7">
 
             
