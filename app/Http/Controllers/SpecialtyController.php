@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Specialty\StoreSpecialtyRequest;
 use App\Models\Specialty;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -28,17 +30,20 @@ class SpecialtyController extends Controller
     }
 
 
-    public function create()
+    public function create(Specialty $specialty):View
     {
-        //
+        return view('specialties.create', compact('specialty'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(StoreSpecialtyRequest $request): RedirectResponse
     {
-        //
+        //Specialty::create([$request->all()]);
+        $specialty = new Specialty();
+        $specialty->name = $request->name;
+        $specialty->description = $request->description;
+        $specialty->save();
+        return redirect()->route('specialties.index');
     }
 
     /**
