@@ -15,14 +15,14 @@ class StoreSpecialtyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:specialties,name',
+            'name' => 'required|unique:specialties,name|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'nombre'
+            'name' => 'nombre especialidad',
         ];
     }
 }

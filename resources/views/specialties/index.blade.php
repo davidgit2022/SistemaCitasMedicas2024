@@ -37,8 +37,8 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary btn-sm" title="Editar" ><i
-                                        class="fas fa-edit"></i></button>
+                                <a href="{{ route('specialties.edit', $specialty->id)}}" class="btn btn-primary btn-sm" title="Editar" ><i
+                                        class="fas fa-edit"></i></a>
                                 <button type="button" class="btn btn-danger btn-sm" title="Eliminar"><i
                                         class="fas fa-trash"></i></button>
                             </div>

@@ -6,23 +6,25 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSpecialtyRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
     public function rules(): array
     {
+        $specialtyId = $this->route('specialty')->id;
         return [
-            //
+            'name' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/|unique:specialties,name,' . $specialtyId
+        ];
+
+    }
+
+    public function attributes():array
+    {
+        return [
+            'name' => 'nombre especialidad',
         ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.theme.app')
 
-@section('title', 'Crear nueva especialidad')
+@section('title', 'Editar nueva especialidad')
 
 @section('content')
     <div class="card shadow">
@@ -8,7 +8,8 @@
         <div class="card-body">
             @include('specialties.partials.include.error-form')
             
-            <form action="{{ route('specialties.store') }}" method="POST">
+            <form action="{{ route('specialties.update', $specialty)}}" method="post">
+                @method('PUT')
                 @include('specialties.partials.form')
             </form>
         </div>

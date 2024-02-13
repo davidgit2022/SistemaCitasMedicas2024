@@ -2,7 +2,7 @@
 <div class="form-group">
     <label for="name">Nombre de la especialidad:</label>
     <input type="text" name="name" class="form-control" placeholder="Nombre de la especialidad"
-        value="{{ old('name') }}" required>
+        value="{{ old('name', $specialty->name) }}" required>
     @error('name')
         <span class="text-danger">
             {{ $message}}
@@ -12,6 +12,7 @@
 <div class="form-group">
     <label for="description">Descripción:</label>
     <input type="text" name="description" class="form-control" placeholder="Descripción"
-        value="{{ old('description') }}">
+        value="{{ old('description', $specialty->description) }}">
 </div>
-<button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+
+<button type="submit" class="btn btn-sm btn-primary">{{ $specialty->id > 0 ? 'Actualizar' : 'Guardar'}}</button>

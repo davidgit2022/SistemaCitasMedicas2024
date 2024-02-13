@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Tests\TestCase;
 use App\Models\Specialty;
 use Illuminate\View\View;
@@ -44,25 +45,34 @@ class SpecialtyTest extends TestCase
     }
 
     public function test_store_method_with_post_request()
-{
-    $request = new Request(['name' => 'Test Specialty']);
-    $controller = new SpecialtyController();
-    $controller->store($request);
+    {
+        $request = new Request(['name' => 'Test Specialty']);
+        $controller = new SpecialtyController();
+        $controller->store($request);
 
-    $this->assertDatabaseHas('specialties', ['name' => 'Test Specialty']);
-}
+        $this->assertDatabaseHas('specialties', ['name' => 'Test Specialty']);
+    }
 
-public function test_index_method_with_no_specialties()
-{
-    Specialty::truncate();
-    $request = new Request();
-    $controller = new SpecialtyController();
-    $response = $controller->index($request);
+    public function test_edit_method_with_get_request() {
+        $specialty = new Specialty();
+        $controller = new SpecialtyController();
+        $response = $controller->edit($specialty);
 
-    $this->assertInstanceOf(View::class, $response);
-    $this->assertEmpty($response->getData()['specialties']);
-    $this->assertNull($response->getData()['filterValue']);
-}
+        $this->assertInstanceOf(View::class, $response);
+        $this->assertEquals($specialty, $response->getData()['specialty']);
+    }
+
+    public function test_index_method_with_no_specialties()
+    {
+        Specialty::truncate();
+        $request = new Request();
+        $controller = new SpecialtyController();
+        $response = $controller->index($request);
+
+        $this->assertInstanceOf(View::class, $response);
+        $this->assertEmpty($response->getData()['specialties']);
+        $this->assertNull($response->getData()['filterValue']);
+    }
 
     // The index method should return a view with a list of specialties and a filter value when a GET request is made with an empty filter value.
     public function test_index_method_with_empty_filter_value()
@@ -70,21 +80,21 @@ public function test_index_method_with_no_specialties()
         $request = new Request(['filterValue' => '']);
         $controller = new SpecialtyController();
         $response = $controller->index($request);
-    
+
         $this->assertInstanceOf(View::class, $response);
         $this->assertArrayHasKey('specialties', $response->getData());
         $this->assertArrayHasKey('filterValue', $response->getData());
     }
 
-        // The index method should return a view with a list of specialties and a filter value when a GET request is made with a non-empty filter value.
-public function test_index_method_with_non_empty_filter_value()
-{
-    $request = new Request(['filterValue' => 'Test']);
-    $controller = new SpecialtyController();
-    $response = $controller->index($request);
+    // The index method should return a view with a list of specialties and a filter value when a GET request is made with a non-empty filter value.
+    public function test_index_method_with_non_empty_filter_value()
+    {
+        $request = new Request(['filterValue' => 'Test']);
+        $controller = new SpecialtyController();
+        $response = $controller->index($request);
 
-    $this->assertInstanceOf(View::class, $response);
-    $this->assertArrayHasKey('specialties', $response->getData());
-    $this->assertArrayHasKey('filterValue', $response->getData());
-}
+        $this->assertInstanceOf(View::class, $response);
+        $this->assertArrayHasKey('specialties', $response->getData());
+        $this->assertArrayHasKey('filterValue', $response->getData());
+    }
 }
