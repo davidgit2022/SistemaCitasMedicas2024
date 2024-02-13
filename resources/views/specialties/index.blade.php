@@ -37,15 +37,14 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('specialties.edit', $specialty) }}" class="btn btn-primary btn-sm"
-                                    title="Editar"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('specialties.destroy', $specialty)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i
+                                <a href="{{ route('specialties.edit', $specialty) }}" class="btn btn-primary btn-sm" title="Editar"><i
+                                        class="fas fa-edit"></i></a>
+                                <form action="{{ route('specialties.destroy', $specialty) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i
                                             class="fas fa-trash"></i></button>
-                                    </form>
-                                
+                                </form>
                             </div>
                         </td>
                     </tr>
