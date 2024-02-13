@@ -68,11 +68,10 @@ class SpecialtyController extends Controller
         return redirect()->route('specialties.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Specialty $specialty)
+
+    public function destroy(Specialty $specialty):RedirectResponse
     {
-        //
+        $specialty->delete();
+        return redirect()->route('specialties.index');
     }
 }
