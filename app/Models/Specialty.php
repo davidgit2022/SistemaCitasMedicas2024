@@ -13,4 +13,15 @@ class Specialty extends Model
         'name',
         'description'
     ];
+
+    public function getFormatNameAttribute()
+    {
+        $name = $this->attributes['name'];
+        return ucfirst($name);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
 }

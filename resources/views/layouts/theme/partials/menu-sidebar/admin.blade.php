@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " href="{{-- {{ route('doctors.index')}} --}}">
+        <a class="nav-link " href="{{ route('doctors.index')}}">
             <i class="fas fa-stethoscope text-info"></i> Médicos
         </a>
     </li>

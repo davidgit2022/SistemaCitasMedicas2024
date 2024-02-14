@@ -21,7 +21,7 @@ class SpecialtyTest extends TestCase
         Artisan::call('migrate:fresh --seed');
     }
 
-    // The index method should return a view with a list of specialties and a filter value when a GET request is made.
+
     public function test_index_method_with_get_request()
     {
         $request = new Request();
@@ -33,7 +33,13 @@ class SpecialtyTest extends TestCase
         $this->assertArrayHasKey('filterValue', $response->getData());
     }
 
-    // The create method should return a view with a specialty object when a GET request is made.
+    public function test_create_specialty() {
+        //$response = $this->get('/specialties/create');
+        $response = $this->get(action([SpecialtyController::class, 'create']));
+        $response->assertStatus(200);
+    }
+
+
     public function test_create_method_with_get_request()
     {
         $specialty = new Specialty();
@@ -74,7 +80,6 @@ class SpecialtyTest extends TestCase
         $this->assertNull($response->getData()['filterValue']);
     }
 
-    // The index method should return a view with a list of specialties and a filter value when a GET request is made with an empty filter value.
     public function test_index_method_with_empty_filter_value()
     {
         $request = new Request(['filterValue' => '']);
@@ -86,7 +91,7 @@ class SpecialtyTest extends TestCase
         $this->assertArrayHasKey('filterValue', $response->getData());
     }
 
-    // The index method should return a view with a list of specialties and a filter value when a GET request is made with a non-empty filter value.
+
     public function test_index_method_with_non_empty_filter_value()
     {
         $request = new Request(['filterValue' => 'Test']);

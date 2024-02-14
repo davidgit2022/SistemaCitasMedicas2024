@@ -19,9 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'password',
+        'dni',
+        'address',
+        'mobile'
     ];
+
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +48,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /* ------------------------- Get And Set ---------------------------*/
+
+    public function getFormatNameAttribute()
+    {
+        $name = $this->attributes['name'];
+        return ucfirst($name);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function getFormatLastNameAttribute()
+    {
+        $lastName = $this->attributes['last_name'];
+        return ucfirst($lastName);
+    }
+
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = strtolower($value);
+    }
+
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+
 }

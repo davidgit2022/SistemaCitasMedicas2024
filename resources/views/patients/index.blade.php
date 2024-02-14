@@ -1,25 +1,25 @@
 @extends('layouts.theme.app')
 
-@section('title', 'Especialidades')
+@section('title', 'Doctors')
 
 @section('content')
     @component('components.table-index')
-        @slot('nameModule', 'Especialidades')
+        @slot('nameModule', 'Doctors')
 
         @slot('routeCreate')
-            {{ route('specialties.create') }}
+            {{ route('doctors.create') }}
         @endslot
 
-        @slot('nameBtnNew', 'Nueva especialidad')
+        @slot('nameBtnNew', 'Nuevo doctor')
 
         @slot('routeIndex')
-            {{ route('specialties.index') }}
+            {{ route('doctors.index') }}
         @endslot
 
-        @slot('placeholder', 'Buscar por nombre de especialidad')
+        @slot('placeholder', 'Buscar por nombre de doctor')
 
         @slot('data')
-            {{ $specialties }}
+            {{ $doctors }}
         @endslot
 
         @slot('table')
@@ -30,30 +30,30 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($specialties as $specialty)
+                @forelse ($doctors as $doctor)
                     <tr>
                         <td>
-                            {{ $specialty->FormatName }}
+                            {{ $doctor->name }}
                         </td>
                         <td>
                             @component('components.buttons-actions')
                                 @slot('routeEdit')
-                                    {{ route('specialties.edit', $specialty) }}
+                                    {{ route('doctors.edit', $doctor) }}
                                 @endslot
 
                                 @slot('routeDestroy')
-                                    {{ route('specialties.destroy', $specialty) }}
+                                    {{ route('doctors.destroy', $doctor) }}
                                 @endslot
                             @endcomponent
                         </td>
                     </tr>
                 @empty
-                    @include('specialties.include.not-result')
+                    @include('doctors.include.not-result')
                 @endforelse
             </tbody>
         @endslot
         @slot('pagination')
-            {{ $specialties->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }}
+            {{-- {{ $doctors->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }} --}}
         @endslot
     @endcomponent
 @endsection
