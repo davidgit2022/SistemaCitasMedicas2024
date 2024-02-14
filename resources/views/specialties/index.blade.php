@@ -36,22 +36,19 @@
                             {{ $specialty->name }}
                         </td>
                         <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('specialties.edit', $specialty) }}" class="btn btn-primary btn-sm" title="Editar"><i
-                                        class="fas fa-edit"></i></a>
-                                <form action="{{ route('specialties.destroy', $specialty) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i
-                                            class="fas fa-trash"></i></button>
-                                </form>
-                            </div>
+                            @component('components.buttons-actions')
+                                @slot('routeEdit')
+                                    {{ route('specialties.edit', $specialty) }}
+                                @endslot
+
+                                @slot('routeDestroy')
+                                    {{ route('specialties.destroy', $specialty) }}
+                                @endslot
+                            @endcomponent
                         </td>
                     </tr>
                 @empty
-                    <tr>
-                        <td colspan="5" class="text-center">Especialidad no encontrada</td>
-                    </tr>
+                    @include('specialties.include.not-result')
                 @endforelse
             </tbody>
         @endslot

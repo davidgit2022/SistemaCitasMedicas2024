@@ -5,24 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Specialty\StoreSpecialtyRequest;
 use App\Http\Requests\Specialty\UpdateSpecialtyRequest;
 use App\Models\Specialty;
+use App\Services\SpecialtyServices;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class SpecialtyController extends Controller
 {
-    private $pagination = 5;
+
+    public function __construct(private SpecialtyServices $specialtyServices)
+    {
+        $this->specialtyServices = $specialtyServices;
+    }
+    
     public function index(Request $request):View
     {
-        $filterValue = $request->input('filterValue');
+        $result = $this->specialtyServices->getAllSpecialties($request);
 
-        if (!empty($filterValue)) {
-            $specialtiesFilter = Specialty::where('name', 'LIKE', '%' . $filterValue . '%');
+        $specialties = $result['specialties'];
+        $filterValue = $result['filterValue'];
 
-            $specialties = $specialtiesFilter->latest()->paginate($this->pagination);
-        }else{
-            $specialties = Specialty::latest()->paginate($this->pagination);
-        }
 
         return view('specialties.index', [
             'specialties' => $specialties,
@@ -39,10 +41,7 @@ class SpecialtyController extends Controller
 
     public function store(StoreSpecialtyRequest $request): RedirectResponse
     {
-        $specialty = new Specialty();
-        $specialty->name = $request->name;
-        $specialty->description = $request->description;
-        $specialty->save();
+        $this->specialtyServices->createSpecialty($request);
 
         return redirect()->route('specialties.index');
     }
@@ -60,10 +59,7 @@ class SpecialtyController extends Controller
 
     public function update(UpdateSpecialtyRequest $request, Specialty $specialty): RedirectResponse
     {
-        $specialty->update([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+        $this->specialtyServices->updateSpecialty($request, $specialty);
 
         return redirect()->route('specialties.index');
     }
