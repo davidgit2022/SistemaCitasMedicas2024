@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class DoctorController extends Controller
 {
@@ -30,9 +32,19 @@ class DoctorController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'last_name' => $request->lastName,
+            'email' => $request->email,
+            'password' => password_hash(Str::random(8), PASSWORD_DEFAULT),
+            'dni' => $request->dni,
+            'address' => $request->address,
+            'mobile' => $request->mobile,
+        ])->roles()->sync(2);
+
+        return redirect()->route('doctors.index');
     }
 
 
@@ -42,20 +54,34 @@ class DoctorController extends Controller
     }
 
 
-    public function edit(User $user)
+    public function edit(User $doctor): View
     {
-        //
+        return view('doctors.edit', compact('doctor'));
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $doctor):RedirectResponse
     {
-        //
+        if(!$doctor ){
+            abort(404, 'Doctor no encontrado');
+        }
+        $doctor->update([
+            'name' => $request->name,
+            'last_name' => $request->lastName,
+            'email' => $request->email,
+            //'password' => password_hash(Str::random(8), PASSWORD_DEFAULT),
+            'dni' => $request->dni,
+            'address' => $request->address,
+            'mobile' => $request->mobile,
+        ]);
+        return redirect()->route('doctors.index');
     }
 
 
-    public function destroy(User $user)
+    public function destroy(User $doctor)
     {
-        //
+        $doctor->delete();
+
+        return redirect()->route('doctors.index');
     }
 }

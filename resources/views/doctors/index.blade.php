@@ -28,8 +28,6 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Correo electrónico</th>
-                    <th scope="col">Cedula</th>
-                    <th scope="col">Dirección</th>
                     <th scope="col">Celular</th>
                     <th scope="col">Accion</th>
                 </tr>
@@ -45,12 +43,6 @@
                         </td>
                         <td>
                             {{ $doctor->email }}
-                        </td>
-                        <td>
-                            {{ $doctor->dni }}
-                        </td>
-                        <td>
-                            {{ $doctor->address }}
                         </td>
                         <td>
                             {{ $doctor->mobile }}

@@ -4,13 +4,13 @@
 
 @section('content')
     <div class="card shadow">
-        @include('specialties.partials.header')
+        @include('doctors.partials.header')
         <div class="card-body">
-            @include('specialties.partials.error-form')
+            @include('doctors.partials.error-form')
             
-            <form action="{{ route('specialties.update', $specialty)}}" method="post">
+            <form action="{{ route('doctors.update', $doctor)}}" method="post">
                 @method('PUT')
-                @include('specialties.include.form')
+                @include('doctors.include.form')
             </form>
         </div>
     </div>

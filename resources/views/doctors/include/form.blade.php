@@ -43,7 +43,7 @@
 <div class="form-group">
     <label for="dni">Cedula:</label>
     <input type="number" id="dni" name="dni" class="form-control" placeholder="Cedula"
-        value="{{ old('dni', $patient->dni) }}" required>
+        value="{{ old('dni', $doctor->dni) }}" required>
     @error('dni')
         <span class="text-danger">
             {{ $message}}

@@ -28,8 +28,6 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Correo electrónico</th>
-                    <th scope="col">Cedula</th>
-                    <th scope="col">Dirección</th>
                     <th scope="col">Celular</th>
                     <th scope="col">Accion</th>
                 </tr>
@@ -38,19 +36,13 @@
                 @forelse ($patients as $patient)
                     <tr>
                         <td>
-                            {{ $patient->name }}
+                            {{ $patient->FormatName }}
                         </td>
                         <td>
-                            {{ $patient->last_name }}
+                            {{ $patient->FormatLastName }}
                         </td>
                         <td>
                             {{ $patient->email }}
-                        </td>
-                        <td>
-                            {{ $patient->dni }}
-                        </td>
-                        <td>
-                            {{ $patient->address }}
                         </td>
                         <td>
                             {{ $patient->mobile }}

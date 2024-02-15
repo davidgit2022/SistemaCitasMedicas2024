@@ -45,6 +45,16 @@ class UserSeeder extends Seeder
 
         User::factory()
             ->count(50)
-            ->create();
+            ->create()
+            ->each(function ($user){
+                $user->assignRole('patient');
+            });
+
+        User::factory()
+            ->count(10)
+            ->create()
+            ->each(function ($user){
+                $user->assignRole('doctor');
+            });
     }
 }
