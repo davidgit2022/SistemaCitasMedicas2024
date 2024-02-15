@@ -4,7 +4,7 @@
 
 @section('content')
     @component('components.table-index')
-        @slot('nameModule', 'Doctors')
+        @slot('nameModule', 'Doctores')
 
         @slot('routeCreate')
             {{ route('doctors.create') }}
@@ -73,7 +73,7 @@
             </tbody>
         @endslot
         @slot('pagination')
-            {{-- {{ $doctors->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }} --}}
+            {{ $doctors->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }}
         @endslot
     @endcomponent
 @endsection

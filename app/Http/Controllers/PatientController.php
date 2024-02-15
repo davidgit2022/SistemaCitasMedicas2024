@@ -17,7 +17,7 @@ class PatientController extends Controller
             $patientsFilter = User::where('name', 'LIKE', '%' . $filterValue . '%' );
             $patients = $patientsFilter->latest()->paginate($this->pagination);
         }else{
-            $patients = User::latest()->paginate($this->pagination);
+            $patients = User::patient()->latest()->paginate($this->pagination);
         }
 
         return view('patients.index',[

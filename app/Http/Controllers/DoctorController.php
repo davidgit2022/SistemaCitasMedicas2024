@@ -14,9 +14,9 @@ class DoctorController extends Controller
         $filterValue = $request->input('filterValue');
 
         if (!empty($filterValue) ) {
-            $doctors = User::where('name', 'LIKE', '%' . $filterValue .'%')->latest()->paginate($this->pagination);
+            $doctors = User::role('doctor')->where('name', 'LIKE', '%' . $filterValue .'%')->latest()->paginate($this->pagination);
         }else{
-            $doctors = User::latest()->paginate($this->pagination);
+            $doctors = User::doctors()->latest()->paginate($this->pagination);
         }
         return view('doctors.index', [
             'filterValue' => $filterValue,

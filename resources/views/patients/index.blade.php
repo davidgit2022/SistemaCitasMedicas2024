@@ -4,7 +4,7 @@
 
 @section('content')
     @component('components.table-index')
-        @slot('nameModule', 'patients')
+        @slot('nameModule', 'Pacientes')
 
         @slot('routeCreate')
             {{ route('patients.create') }}

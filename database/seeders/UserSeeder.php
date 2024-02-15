@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'dni' => '1085300505',
             'address' => 'street false',
             'mobile' => '3122359623'
-        ]);
+        ])->assignRole('admin');
 
         User::create([
             'name' => 'doctor',
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'dni' => '1085300505',
             'address' => 'street false',
             'mobile' => '3122359623'
-        ]);
+        ])->assignRole('doctor');
 
 
         User::create([
@@ -40,6 +40,11 @@ class UserSeeder extends Seeder
             'dni' => '1085300505',
             'address' => 'street false',
             'mobile' => '3122359623'
-        ]);
+        ])->assignRole('patient');
+
+
+        User::factory()
+            ->count(50)
+            ->create();
     }
 }

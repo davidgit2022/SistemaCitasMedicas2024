@@ -20,8 +20,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            SpecialtySeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
+        ]);
 
-        Specialty::factory(10)->create();
-        $this->call(UserSeeder::class);
     }
 }
