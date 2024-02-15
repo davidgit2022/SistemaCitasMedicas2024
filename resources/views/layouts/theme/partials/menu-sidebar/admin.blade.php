@@ -16,7 +16,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " href="./examples/profile.html">
+        <a class="nav-link " href="{{ route('patients.index')}}">
             <i class="fas fa-bed text-warning"></i> Pacientes
         </a>
     </li>

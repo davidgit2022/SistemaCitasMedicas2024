@@ -41,10 +41,10 @@
 {{-- DNI --}}
 
 <div class="form-group">
-    <label for="identification">Cedula:</label>
-    <input type="number" id="identification" name="identification" class="form-control" placeholder="Cedula"
-        value="{{ old('identification', $doctor->identification) }}" required>
-    @error('identification')
+    <label for="dni">Cedula:</label>
+    <input type="number" id="dni" name="dni" class="form-control" placeholder="Cedula"
+        value="{{ old('dni', $patient->dni) }}" required>
+    @error('dni')
         <span class="text-danger">
             {{ $message}}
         </span>

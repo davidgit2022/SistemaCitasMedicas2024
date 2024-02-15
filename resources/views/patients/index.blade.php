@@ -1,59 +1,79 @@
 @extends('layouts.theme.app')
 
-@section('title', 'Doctors')
+@section('title', 'Pacientes')
 
 @section('content')
     @component('components.table-index')
-        @slot('nameModule', 'Doctors')
+        @slot('nameModule', 'patients')
 
         @slot('routeCreate')
-            {{ route('doctors.create') }}
+            {{ route('patients.create') }}
         @endslot
 
-        @slot('nameBtnNew', 'Nuevo doctor')
+        @slot('nameBtnNew', 'Nuevo paciente')
 
         @slot('routeIndex')
-            {{ route('doctors.index') }}
+            {{ route('patients.index') }}
         @endslot
 
-        @slot('placeholder', 'Buscar por nombre de doctor')
+        @slot('placeholder', 'Buscar por nombre de paciente')
 
         @slot('data')
-            {{ $doctors }}
+            {{ $patients }}
         @endslot
 
         @slot('table')
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo electrónico</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Celular</th>
                     <th scope="col">Accion</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($doctors as $doctor)
+                @forelse ($patients as $patient)
                     <tr>
                         <td>
-                            {{ $doctor->name }}
+                            {{ $patient->name }}
+                        </td>
+                        <td>
+                            {{ $patient->last_name }}
+                        </td>
+                        <td>
+                            {{ $patient->email }}
+                        </td>
+                        <td>
+                            {{ $patient->dni }}
+                        </td>
+                        <td>
+                            {{ $patient->address }}
+                        </td>
+                        <td>
+                            {{ $patient->mobile }}
                         </td>
                         <td>
                             @component('components.buttons-actions')
                                 @slot('routeEdit')
-                                    {{ route('doctors.edit', $doctor) }}
+                                    {{ route('patients.edit', $patient) }}
                                 @endslot
 
                                 @slot('routeDestroy')
-                                    {{ route('doctors.destroy', $doctor) }}
+                                    {{ route('patients.destroy', $patient) }}
                                 @endslot
                             @endcomponent
                         </td>
                     </tr>
                 @empty
-                    @include('doctors.include.not-result')
+                    @include('patients.include.not-result')
                 @endforelse
             </tbody>
         @endslot
         @slot('pagination')
-            {{-- {{ $doctors->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }} --}}
+            {{-- {{ $patients->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }} --}}
         @endslot
     @endcomponent
 @endsection
