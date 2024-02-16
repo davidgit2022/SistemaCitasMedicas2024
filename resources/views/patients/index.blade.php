@@ -65,7 +65,7 @@
             </tbody>
         @endslot
         @slot('pagination')
-            {{-- {{ $patients->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }} --}}
+            {{ $patients->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }}
         @endslot
     @endcomponent
 @endsection

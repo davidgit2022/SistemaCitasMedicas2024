@@ -22,12 +22,9 @@ class DoctorController extends Controller
     {
         $result = $this->doctorServices->getAllDoctors($request);
 
-        $doctors = $result['doctors'];
-        $filterValue = $result['filterValue'];
-
         return view('doctors.index', [
-            'filterValue' => $filterValue,
-            'doctors' => $doctors
+            'filterValue' => $result['doctors'],
+            'doctors' => $result['filterValue']
         ]);
 
     }

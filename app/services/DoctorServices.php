@@ -40,7 +40,7 @@ class DoctorServices {
 
     public function createDoctor(StoreDoctorRequest $request)
     {
-        $doctor = [
+        $doctor = User::create([
             'name' => $request->name,
             'last_name' => $request->lastName,
             'email' => $request->email,
@@ -48,13 +48,11 @@ class DoctorServices {
             'dni' => $request->dni,
             'address' => $request->address,
             'mobile' => $request->mobile,
-        ];
+        ]);
 
-        $user = User::create($doctor);
+        $doctor->roles()->sync(2);
 
-        $user->roles()->sync(2);
-
-        $user->specialties()->attach($request->input('specialties'));
+        $doctor->specialties()->attach($request->input('specialties'));
         return $doctor;
     }
 

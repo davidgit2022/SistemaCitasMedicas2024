@@ -1,16 +1,16 @@
 @extends('layouts.theme.app')
 
-@section('title', 'Editar nueva especialidad')
+@section('title', 'Editar nuevo paciente')
 
 @section('content')
     <div class="card shadow">
-        @include('specialties.partials.header')
+        @include('patients.partials.header')
         <div class="card-body">
-            @include('specialties.partials.error-form')
+            @include('patients.partials.error-form')
             
-            <form action="{{ route('specialties.update', $specialty)}}" method="post">
+            <form action="{{ route('patients.update', $patient)}}" method="post">
                 @method('PUT')
-                @include('specialties.include.form')
+                @include('patients.include.form')
             </form>
         </div>
     </div>

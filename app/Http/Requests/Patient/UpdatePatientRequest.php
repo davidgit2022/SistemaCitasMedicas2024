@@ -6,23 +6,35 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePatientRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        $patientId = $this->route('patient')->id;
         return [
-            //
+            'name' => 'required|regex:/^[a-zA-ZáéíóúñÑÁÉÍÓÚ\s]+$/',
+            'lastName' => 'required|regex:/^[a-zA-ZáéíóúñÑÁÉÍÓÚ\s]+$/',
+            'email' => 'required|unique:users,email,' . $patientId,
+            'dni' => 'required|numeric|regex:/^[0123456789]+$/',
+            'address' => 'required',
+            'mobile' => 'required|numeric|digits:10',
+            'photo' => 'nullable|image|mimes:png,jpg'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'lastName' => 'apellido',
+            'email' => 'correo electrónico',
+            'dni' => 'cedula',
+            'address' => 'dirección',
+            'mobile' => 'cedular',
+            'photo' => 'nullable'
         ];
     }
 }
