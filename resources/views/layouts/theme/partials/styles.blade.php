@@ -9,6 +9,6 @@
 <!-- CSS Files -->
 <link href="{{ asset('css/argon-dashboard.css?v=1.1.2') }}" rel="stylesheet" />
 
-
+@stack('styles')
 
 

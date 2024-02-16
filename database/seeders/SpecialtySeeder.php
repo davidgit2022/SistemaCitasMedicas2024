@@ -23,10 +23,11 @@ class SpecialtySeeder extends Seeder
             'Pediatría',
         ];
 
-        foreach ($specialties as $specialty) {
+        foreach ($specialties as $specialtyName) {
             Specialty::create([
-                'name' => $specialty,
+                'name' => $specialtyName,
             ]);
+
         }
     }
 }

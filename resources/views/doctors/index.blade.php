@@ -49,6 +49,7 @@
                         </td>
                         <td>
                             @component('components.buttons-actions')
+                            
                                 @slot('routeEdit')
                                     {{ route('doctors.edit', $doctor) }}
                                 @endslot
@@ -56,6 +57,7 @@
                                 @slot('routeDestroy')
                                     {{ route('doctors.destroy', $doctor) }}
                                 @endslot
+                                
                             @endcomponent
                         </td>
                     </tr>

@@ -2,47 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Doctor\StoreDoctorRequest;
+use App\Http\Requests\Doctor\UpdateDoctorRequest;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Services\DoctorServices;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class DoctorController extends Controller
 {
-    private $pagination = 10;
+
+    public function __construct(private DoctorServices $doctorServices)
+    {
+        $this->doctorServices = $doctorServices;
+    }
+
     public function index(Request $request):View
     {
-        $filterValue = $request->input('filterValue');
+        $result = $this->doctorServices->getAllDoctors($request);
 
-        if (!empty($filterValue) ) {
-            $doctors = User::role('doctor')->where('name', 'LIKE', '%' . $filterValue .'%')->latest()->paginate($this->pagination);
-        }else{
-            $doctors = User::doctors()->latest()->paginate($this->pagination);
-        }
+        $doctors = $result['doctors'];
+        $filterValue = $result['filterValue'];
+
         return view('doctors.index', [
             'filterValue' => $filterValue,
             'doctors' => $doctors
         ]);
+
     }
 
     public function create(User $doctor):View
     {
-        return view('doctors.create', compact('doctor'));
+        $result = $this->doctorServices->viewCreateDoctor($doctor);
+         
+        return view('doctors.create', [
+            'doctor' => $doctor,
+            'specialties' => $result['specialties'],
+            'idsSpecialties' => $result['idsSpecialties'],
+        ]);
     }
 
 
-    public function store(Request $request):RedirectResponse
+    public function store(StoreDoctorRequest $request):RedirectResponse
     {
-        User::create([
-            'name' => $request->name,
-            'last_name' => $request->lastName,
-            'email' => $request->email,
-            'password' => password_hash(Str::random(8), PASSWORD_DEFAULT),
-            'dni' => $request->dni,
-            'address' => $request->address,
-            'mobile' => $request->mobile,
-        ])->roles()->sync(2);
+        $this->doctorServices->createDoctor($request);
 
         return redirect()->route('doctors.index');
     }
@@ -56,24 +60,23 @@ class DoctorController extends Controller
 
     public function edit(User $doctor): View
     {
-        return view('doctors.edit', compact('doctor'));
+        $result = $this->doctorServices->viewEditDoctor($doctor);
+        return view('doctors.edit',[
+            'doctor' => $doctor,
+            'specialties' => $result['specialties'],
+            'idsSpecialties' => $result['idsSpecialties']
+        ]);
     }
 
 
-    public function update(Request $request, User $doctor):RedirectResponse
+    public function update(UpdateDoctorRequest $request, User $doctor):RedirectResponse
     {
         if(!$doctor ){
             abort(404, 'Doctor no encontrado');
         }
-        $doctor->update([
-            'name' => $request->name,
-            'last_name' => $request->lastName,
-            'email' => $request->email,
-            //'password' => password_hash(Str::random(8), PASSWORD_DEFAULT),
-            'dni' => $request->dni,
-            'address' => $request->address,
-            'mobile' => $request->mobile,
-        ]);
+
+        $this->doctorServices->updateDoctor($request,$doctor);
+        
         return redirect()->route('doctors.index');
     }
 

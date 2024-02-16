@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Specialty extends Model
 {
@@ -23,5 +24,9 @@ class Specialty extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = strtolower($value);
+    }
+
+    public function doctors() : BelongsToMany {
+        return $this->belongsToMany(User::class);
     }
 }

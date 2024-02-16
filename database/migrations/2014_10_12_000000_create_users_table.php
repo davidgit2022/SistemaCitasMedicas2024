@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('dni');
             $table->string('address')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('photo', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

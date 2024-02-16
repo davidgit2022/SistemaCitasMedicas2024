@@ -18,6 +18,6 @@
         });
 </script>
 
-@yield('javascript')
+@stack('scripts')
 
 

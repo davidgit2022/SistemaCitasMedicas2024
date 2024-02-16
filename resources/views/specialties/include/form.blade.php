@@ -2,7 +2,7 @@
 <div class="form-group">
     <label for="name">Nombre de la especialidad:</label>
     <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la especialidad"
-        value="{{ old('name', $specialty->name) }}" required>
+        value="{{ old('name', $specialty->Formatname) }}" required>
     @error('name')
         <span class="text-danger">
             {{ $message}}
