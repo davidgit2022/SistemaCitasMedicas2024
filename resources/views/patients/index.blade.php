@@ -22,6 +22,7 @@
             {{ $patients }}
         @endslot
 
+
         @slot('table')
             <thead class="thead-light">
                 <tr>

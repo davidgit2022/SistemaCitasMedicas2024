@@ -38,7 +38,8 @@ class PatientController extends Controller
     {
         $this->patientServices->createPatient($request);
 
-        return redirect()->route('patients.index');
+        $notification = 'El paciente se ha creado correctamente.';
+        return redirect()->route('patients.index')->with(compact('notification'));
     }
 
 
@@ -57,7 +58,8 @@ class PatientController extends Controller
     {
         $this->patientServices->updatePatient($request, $patient);
 
-        return redirect()->route('patients.index')->with('success-create', 'Paciente actualizado correctamente');;
+        $notification = 'El paciente se ha creado correctamente.';
+        return redirect()->route('patients.index')->with(compact('notification'));
     }
 
 
@@ -65,7 +67,8 @@ class PatientController extends Controller
     {
         $doctor->delete();
 
-        return redirect()->route('patients.index');
+        $notification = 'El paciente se ha eliminado correctamente.';
+        return redirect()->route('patients.index')->with(compact('notification'));
 
     }
 }

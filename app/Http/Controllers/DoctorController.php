@@ -27,6 +27,9 @@ class DoctorController extends Controller
             'doctors' => $result['filterValue']
         ]);
 
+        $notification = 'El doctor se ha creado correctamente.';
+        return redirect()->route('doctors.index')->with(compact('notification'));
+
     }
 
     public function create(User $doctor):View
@@ -45,7 +48,8 @@ class DoctorController extends Controller
     {
         $this->doctorServices->createDoctor($request);
 
-        return redirect()->route('doctors.index');
+        $notification = 'El doctor se ha creado correctamente.';
+        return redirect()->route('doctors.index')->with(compact('notification'));
     }
 
 
@@ -74,7 +78,8 @@ class DoctorController extends Controller
 
         $this->doctorServices->updateDoctor($request,$doctor);
         
-        return redirect()->route('doctors.index');
+        $notification = 'El doctor se ha actualizado correctamente.';
+        return redirect()->route('doctors.index')->with(compact('notification'));
     }
 
 
@@ -82,6 +87,7 @@ class DoctorController extends Controller
     {
         $doctor->delete();
 
-        return redirect()->route('doctors.index');
+        $notification = 'El doctor se ha eliminado correctamente.';
+        return redirect()->route('doctors.index')->with(compact('notification'));
     }
 }

@@ -22,13 +22,9 @@ class SpecialtyController extends Controller
     {
         $result = $this->specialtyServices->getAllSpecialties($request);
 
-        $specialties = $result['specialties'];
-        $filterValue = $result['filterValue'];
-
-
         return view('specialties.index', [
-            'specialties' => $specialties,
-            'filterValue' => $filterValue
+            'specialties' => $result['specialties'],
+            'filterValue' => $result['filterValue']
         ]);
     }
 
@@ -43,7 +39,8 @@ class SpecialtyController extends Controller
     {
         $this->specialtyServices->createSpecialty($request);
 
-        return redirect()->route('specialties.index');
+        $notification = 'La especialidad se ha creado correctamente.';
+        return redirect()->route('specialties.index')->with(compact('notification'));
     }
 
 
@@ -61,13 +58,15 @@ class SpecialtyController extends Controller
     {
         $this->specialtyServices->updateSpecialty($request, $specialty);
 
-        return redirect()->route('specialties.index');
+        $notification = 'La especialidad se ha creado actualizado.';
+        return redirect()->route('specialties.index')->with(compact('notification'));
     }
 
 
     public function destroy(Specialty $specialty):RedirectResponse
     {
         $specialty->delete();
-        return redirect()->route('specialties.index');
+        $notification = 'La especialidad se ha eliminado correctamente.';
+        return redirect()->route('specialties.index')->with(compact('notification'));
     }
 }
