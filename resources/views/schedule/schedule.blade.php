@@ -1,5 +1,7 @@
 @extends('layouts.theme.app')
 
+@section('title', 'Gestionar horario')
+
 @section('content')
     <form action="{{ route('schedule.store') }}" method="POST">
         @csrf
@@ -56,6 +58,7 @@
                                 </td>
                                 <td>
                                     <div class="row">
+                                        {{-- Morning start --}}
                                         <div class="col">
                                             <select id="" class="form-control" name="morning_start[]">
                                                 @for ($i = 8; $i <= 11; $i++)
@@ -70,6 +73,7 @@
                                                 @endfor
                                             </select>
                                         </div>
+                                        {{-- Morning end --}}
                                         <div class="col">
                                             <select id="" class="form-control" name="morning_end[]">
                                                 @for ($i = 8; $i <= 11; $i++)
@@ -88,29 +92,32 @@
                                 </td>
                                 <td>
                                     <div class="row">
+                                        {{-- Afternoon start --}}
                                         <div class="col">
                                             <select id="" class="form-control" name="afternoon_start[]">
-                                                @for ($i = 2; $i <= 11; $i++)
+                                                @for ($i = 2; $i <= 5; $i++)
                                                     <option
-                                                        value="{{ $i + 12 }}:00"@if ($i . ':00 PM' == $schedule->afternoon_start) selected @endif>
+                                                        value="{{ $i + 10 }}:00"@if ($i . ':00 PM' == $schedule->afternoon_start) selected @endif>
                                                         {{ $i }}:00 PM
                                                     </option>
                                                     <option
-                                                        value="{{ $i + 12 }}:30"@if ($i . ':30 PM' == $schedule->afternoon_start) selected @endif>
+                                                        value="{{ $i + 10 }}:30"@if ($i . ':30 PM' == $schedule->afternoon_start) selected @endif>
                                                         {{ $i }}:30 PM
                                                     </option>
                                                 @endfor
                                             </select>
+                                            
                                         </div>
+                                        {{-- Afternoon end --}}
                                         <div class="col">
                                             <select id="" class="form-control" name="afternoon_end[]">
-                                                @for ($i = 2; $i <= 11; $i++)
+                                                @for ($i = 2; $i <= 5; $i++)
                                                     <option
-                                                        value="{{ $i + 12 }}:00"@if ($i . ':00 PM' == $schedule->afternoon_end) selected @endif>
+                                                        value="{{ $i + 10 }}:00"@if ($i . ':00 PM' == $schedule->afternoon_end) selected @endif>
                                                         {{ $i }}:00 PM
                                                     </option>
                                                     <option
-                                                        value="{{ $i + 12 }}:30"@if ($i . ':30 PM' == $schedule->afternoon_end) selected @endif>
+                                                        value="{{ $i + 10 }}:30"@if ($i . ':30 PM' == $schedule->afternoon_end) selected @endif>
                                                         {{ $i }}:30 PM
                                                     </option>
                                                 @endfor
