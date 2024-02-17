@@ -23,8 +23,8 @@ class DoctorController extends Controller
         $result = $this->doctorServices->getAllDoctors($request);
 
         return view('doctors.index', [
-            'filterValue' => $result['doctors'],
-            'doctors' => $result['filterValue']
+            'filterValue' => $result['filterValue'],
+            'doctors' => $result['doctors']
         ]);
 
         $notification = 'El doctor se ha creado correctamente.';

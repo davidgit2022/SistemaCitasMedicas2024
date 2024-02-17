@@ -71,13 +71,13 @@
             </form>
             <!-- Navigation -->
             <!-- Admin -->
-            @include('layouts.theme.partials.menu-sidebar.admin')
+            @include('layouts.theme.partials.menu-sidebar.menu')
 
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
-                        <i class="fas fa-sign-in-alt"></i> Cerrar sesión
+                        <i class="fas fa-sign-in-alt"></i>&nbsp;Cerrar sesión
                     </a>
                     <form action="{{ route('logout') }}" method="POST" style="display: none;" id="formLogout">
                         @csrf
