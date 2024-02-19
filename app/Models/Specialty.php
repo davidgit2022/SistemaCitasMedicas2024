@@ -15,6 +15,11 @@ class Specialty extends Model
         'description'
     ];
 
+    public function users() : BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function getFormatNameAttribute()
     {
         $name = $this->attributes['name'];
@@ -27,6 +32,6 @@ class Specialty extends Model
     }
 
     public function doctors() : BelongsToMany {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

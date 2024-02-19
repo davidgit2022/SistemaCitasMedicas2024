@@ -31,7 +31,6 @@ class User extends Authenticatable
     ];
 
 
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -93,7 +92,7 @@ class User extends Authenticatable
 
     public function specialties():BelongsToMany
     {
-        return $this->belongsToMany(Specialty::class);
+        return $this->belongsToMany(Specialty::class)->withTimestamps();
     }
 
 

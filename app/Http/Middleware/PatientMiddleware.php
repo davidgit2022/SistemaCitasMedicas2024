@@ -15,6 +15,11 @@ class PatientMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(auth()->user()->hasRole('patient')){
+
+            return $next($request);
+        }
+
+        return redirect('/');
     }
 }

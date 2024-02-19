@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link " href="/reservarcitas/create">
+    <a class="nav-link " href="{{ route('appointments.create')}}">
         <i class="ni ni-calendar-grid-58 text-primary"></i>&nbsp;Reservar cita
     </a>
 </li>

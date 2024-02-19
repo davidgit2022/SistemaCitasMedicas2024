@@ -6,6 +6,7 @@
 <script src="{{ asset('js/plugins/chart.js/dist/Chart.min.js') }}"></script>
 <script src="{{ asset('js/plugins/chart.js/dist/Chart.extension.js') }}"></script>
 <!--   Argon JS   -->
+@stack('scripts')
 <script src="{{ asset('js/argon-dashboard.min.js?v=1.1.2') }}"></script>
 
 
@@ -18,6 +19,6 @@
         });
 </script>
 
-@stack('scripts')
+
 
 

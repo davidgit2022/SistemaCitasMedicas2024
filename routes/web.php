@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Doctor\ScheduleController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
@@ -32,6 +33,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'doctor'])->group(function () {
     Route::get('/schedule', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::post('/schedule-store', [ScheduleController::class, 'store'])->name('schedule.store');
+});
+
+Route::middleware(['auth', 'patient'])->group(function () {
+    Route::get('/booking-appointments', [AppointmentController::class, 'create'])->name('appointments.create');
+
+    Route::post('/my-appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+
+    Route::get('/specialties/{specialty}/doctors', [AppointmentController::class, 'create'])->name('appointments.create');
 });
 
 require __DIR__.'/auth.php';

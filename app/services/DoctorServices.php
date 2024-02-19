@@ -78,6 +78,8 @@ class DoctorServices {
             'mobile' => $request->mobile,
         ]);
 
+        $doctor->specialties()->sync($request->input('specialties'));
+
         return $doctor;
     }
 
