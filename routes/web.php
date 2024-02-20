@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ScheduleController as ApiScheduleController;
+use App\Http\Controllers\Api\SpecialtyController as ApiSpecialtyController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Doctor\ScheduleController;
 use App\Http\Controllers\DoctorController;
@@ -35,12 +37,14 @@ Route::middleware(['auth', 'doctor'])->group(function () {
     Route::post('/schedule-store', [ScheduleController::class, 'store'])->name('schedule.store');
 });
 
-Route::middleware(['auth', 'patient'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/booking-appointments', [AppointmentController::class, 'create'])->name('appointments.create');
 
-    Route::post('/my-appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::post('/book-appointment', [AppointmentController::class, 'store'])->name('appointments.store');
 
-    Route::get('/specialties/{specialty}/doctors', [AppointmentController::class, 'create'])->name('appointments.create');
+    Route::get('/specialties/{specialty}/doctors', [ApiSpecialtyController::class, 'doctors'])->name('appointments.doctors');
+
+    Route::get('/schedule/hours', [ApiScheduleController::class, 'hours'])->name('schedule.hours');
 });
 
 require __DIR__.'/auth.php';
