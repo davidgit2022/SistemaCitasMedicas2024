@@ -18,6 +18,11 @@
         <div class="card-body">
 
             @include('doctors.partials.error-form')
+            @if (session('notification'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('notification') }}
+                </div>
+            @endif
             <form action="{{ route('appointments.store') }}" method="POST">
                 @csrf
                 {{-- Specialties --}}

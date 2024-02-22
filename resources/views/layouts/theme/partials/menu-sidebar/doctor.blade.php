@@ -4,7 +4,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link " href="/miscitas">
+    <a class="nav-link " href="{{ route('appointments.index')}}">
         <i class="fas fa-clock text-info"></i>&nbsp;Mis citas
     </a>
 </li>

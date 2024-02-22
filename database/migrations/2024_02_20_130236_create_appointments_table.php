@@ -17,7 +17,7 @@ return new class extends Migration
             $table->time('scheduled_time');
             $table->string('type');
             $table->string('description');
-            $table->string('status')->default('Reserved');
+            $table->enum('status', ['reserved', 'confirmed', 'completed', 'cancelled'])->default('reserved');
 
             //Doctor
             $table->unsignedBigInteger('doctor_id');

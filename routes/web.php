@@ -23,7 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -38,13 +37,28 @@ Route::middleware(['auth', 'doctor'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/booking-appointments', [AppointmentController::class, 'create'])->name('appointments.create');
 
-    Route::post('/book-appointment', [AppointmentController::class, 'store'])->name('appointments.store');
+    /* Appointments */
+    Route::controller(AppointmentController::class)->group(function () {
+        Route::get('/booking-appointments/create',  'create')->name('appointments.create');
+
+        Route::post('/book-appointment',  'store')->name('appointments.store');
+
+        Route::get('/my-appointments',  'index')->name('appointments.index');
+
+        Route::get('/my-appointments/{appointment}','show')->name('appointments.show');
+
+        Route::post('/my-appointments/{appointment}/cancel','cancel')->name('appointments.cancel');
+
+        Route::post('/my-appointments/{appointment}/confirm','confirm')->name('appointments.confirm');
+
+        Route::get('/my-appointments/{appointment}/cancel','formCancel');
+    });
+
 
     Route::get('/specialties/{specialty}/doctors', [ApiSpecialtyController::class, 'doctors'])->name('appointments.doctors');
 
     Route::get('/schedule/hours', [ApiScheduleController::class, 'hours'])->name('schedule.hours');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

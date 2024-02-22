@@ -39,27 +39,4 @@ class StoreAppointmentRequest extends FormRequest
         ];
     }
 
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $date = $this->input('scheduled_date');
-            $doctorId = $this->input('doctor_id');
-            $scheduledTime = $this->input('scheduled_time');
-
-            if ($date && $doctorId && $scheduledTime) {
-                $start = new Carbon($scheduledTime);
-            } else {
-                return;
-            }
-
-            $scheduleServiceInterface = app(ScheduleServiceInterface::class);
-
-            if (!$scheduleServiceInterface->isAvailableInterval($date, $doctorId, $start)) {
-                $validator->errors()->add(
-                    'availableTime',
-                    'La hora seleccionada ya se encuentra reservada por otro paciente.'
-                );
-            }
-        });
-    }
 }
