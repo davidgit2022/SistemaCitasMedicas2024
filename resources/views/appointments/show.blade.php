@@ -1,78 +1,81 @@
 @extends('layouts.theme.app')
 
-@section('title', 'Detalles de la cita')
+@if ($appointment->status  ==  'confirmed')
+    @section('title','Detalles de la cita confirmada')
+@endif
+
+@if($appointment->status  ==  'reserved')
+    @section('title','Detalles de la cita reservada')
+@endif
+
+@if ($appointment->status  ==  'completed' || $appointment->status  ==  'cancelled')
+    @section('title','Detalles de la cita finalizada')
+
+@endif
 
 @section('content')
-    <div class="card shadow">
-        <div class="card-header border-0">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h3 class="mb-0">Citas #{{ $appointment->id }} </h3>
-                </div>
-                <div class="col text-right">
-                    <a href="{{ route('appointments.index') }}" class="btn btn-sm btn-success">Regresar</a>
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <ul>
-                <dd>
-                    <strong>Fecha:</strong>&nbsp; {{ $appointment->scheduled_date }}
-                </dd>
-                <dd>
-                    <strong>Hora de atención:</strong>&nbsp; {{ $appointment->scheduled_time }}
-                </dd>
-                @if ($role == 'paciente' || $role == 'admin')
-                    <dd>
-                        <strong>Doctor:</strong>&nbsp; {{ $appointment->doctor->name }}
-                    </dd>
-                @endif
-                @if ($role == 'doctor' || $role == 'admin')
-                    <dd>
-                        <strong>Paciente:</strong>&nbsp; {{ $appointment->patient->name }}
-                    </dd>
-                @endif
+    @component('components.appointment-component')
+        @slot('nameTitle')
+        Citas #{{ $appointment->id }}
+        @endslot
 
+        @slot('cardBody')
+        <ul>
+            <dd>
+                <strong>Fecha:</strong>&nbsp; {{ $appointment->scheduled_date }}
+            </dd>
+            <dd>
+                <strong>Hora de atención:</strong>&nbsp; {{ $appointment->scheduled_time }}
+            </dd>
+            @if ($role == 'patient' || $role == 'admin')
                 <dd>
-                    <strong>Especialidad:</strong>&nbsp; {{ $appointment->specialty->name }}
+                    <strong>Doctor:</strong>&nbsp; {{ $appointment->doctor->FormatName }}
                 </dd>
+            @endif
+            @if ($role == 'doctor' || $role == 'admin')
                 <dd>
-                    <strong>Tipo de consulta:</strong>&nbsp; {{ $appointment->type }}
+                    <strong>Paciente:</strong>&nbsp; {{ $appointment->patient->FormatName }}
                 </dd>
-                <dd>
-                    <strong>Estado:</strong>&nbsp; {{ $appointment->FormatStatus }}
-                </dd>
-                <dd>
-                    <strong>Síntomas:</strong>&nbsp; {{ $appointment->description }}
-                </dd>
-            </ul>
-
-            @if ($appointment->status == 'cancelled')
-                <div class="alert bg-light text-primary">
-                    <h3>Detalles de la cancelación</h3>
-                    @if ($appointment->cancellation)
-                        <ul>
-                            <li>
-                                <strong>Fecha de cancelación:</strong>&nbsp;{{ $appointment->cancellation->created_at }}
-                            </li>
-                            <li>
-                                <strong>La cita fue
-                                    cancelada:</strong>&nbsp;{{ $appointment->cancellation->cancelled_by->name }}
-                            </li>
-                            <li>
-                                <strong>Motivo de la
-                                    cancelación:</strong>&nbsp;{{ $appointment->cancellation->justification }}
-                            </li>
-                        </ul>
-                    @else
-                        <ul>
-                            <li>La cita fue cancelada antes de su confirmación.</li>
-                        </ul>
-                    @endif
-                </div>
             @endif
 
-        </div>
-    </div>
+            <dd>
+                <strong>Especialidad:</strong>&nbsp; {{ $appointment->specialty->FormatName }}
+            </dd>
+            <dd>
+                <strong>Tipo de consulta:</strong>&nbsp; {{ $appointment->FormatType }}
+            </dd>
+            <dd>
+                <strong>Estado:</strong>&nbsp; {{ $appointment->FormatStatus }}
+            </dd>
+            <dd>
+                <strong>Síntomas:</strong>&nbsp; {{ $appointment->FormatDescription }}
+            </dd>
+        </ul>
+
+        @if ($appointment->status == 'cancelled')
+            <div class="alert bg-light text-primary">
+                <h3>Detalles de la cancelación</h3>
+                @if ($appointment->cancellation)
+                    <ul>
+                        <li>
+                            <strong>Fecha de cancelación:</strong>&nbsp;{{ $appointment->cancellation->created_at }}
+                        </li>
+                        <li>
+                            <strong>La cita fue
+                                cancelada:</strong>&nbsp;{{ $appointment->cancellation->cancelled_by->name }}
+                        </li>
+                        <li>
+                            <strong>Motivo de la
+                                cancelación:</strong>&nbsp;{{ $appointment->cancellation->justification }}
+                        </li>
+                    </ul>
+                @else
+                    <ul>
+                        <li>La cita fue cancelada antes de su confirmación.</li>
+                    </ul>
+                @endif
+            </div>
+        @endif
+        @endslot
+    @endcomponent
 @endsection

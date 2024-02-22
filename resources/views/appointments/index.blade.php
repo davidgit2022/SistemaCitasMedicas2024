@@ -12,7 +12,11 @@
             </div>
         </div>
         <div class="card-body">
-            @include('doctors.partials.error-form')
+            @if (session('notification'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('notification') }}
+                </div>
+            @endif
             
             <div class="nav-wrapper">
                 <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">

@@ -121,4 +121,12 @@ class AppointmentServices{
 
         return $appointment;
     }
+
+    public function detailsAppointment()
+    {
+        $user = Auth::user();
+        $role = $user['name'];
+
+        return $role;
+    }
 }

@@ -10,9 +10,9 @@ use App\Models\Appointment;
 use App\Services\AppointmentServices;
 use App\Interfaces\ScheduleServiceInterface;
 use App\Http\Requests\Appointment\StoreAppointmentRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
-;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -43,7 +43,7 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function store(StoreAppointmentRequest $request, ScheduleServiceInterface $scheduleServiceInterface)
+    public function store(StoreAppointmentRequest $request, ScheduleServiceInterface $scheduleServiceInterface):RedirectResponse
     {
         $validator = $request->validated();
 
@@ -73,7 +73,7 @@ class AppointmentController extends Controller
         return redirect()->route('appointments.index')->with(compact('notification'));
     }
 
-    public function cancel(Appointment $appointment, Request $request)
+    public function cancel(Appointment $appointment, Request $request):RedirectResponse
     {
         $this->appointmentServices->cancelledAppointment($appointment, $request);
 
@@ -82,7 +82,7 @@ class AppointmentController extends Controller
         return redirect()->route('appointments.index')->with(compact('notification'));
     }
 
-    public function confirm(Appointment $appointment)
+    public function confirm(Appointment $appointment):RedirectResponse
     {
         $this->appointmentServices->confirmAppointment($appointment);
 
@@ -91,9 +91,24 @@ class AppointmentController extends Controller
         return redirect()->route('appointments.index')->with(compact('notification'));
     }
 
-    public function show(Appointment $appointment)
+    public function formCancel(Appointment $appointment):View
     {
-        $role = auth()->user()->role;
-        return view('appointments.show', compact('appointment', 'role'));
+        if ($appointment->status == 'confirmed') {
+            $user = Auth::user();
+            $role = $user['name'];
+
+            return view('appointments.cancel', compact('appointment', 'role'));
+        }
+
+        return redirect()->route('appointments.index');
+    }
+
+    public function show(Appointment $appointment):View
+    {
+        $role = $this->appointmentServices->detailsAppointment();
+        return view('appointments.show', [
+            'appointment' => $appointment, 
+            'role' => $role
+        ]);
     }
 }

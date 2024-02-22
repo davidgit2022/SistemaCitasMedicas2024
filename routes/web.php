@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Api\ScheduleController as ApiScheduleController;
 use App\Http\Controllers\Api\SpecialtyController as ApiSpecialtyController;
 use App\Http\Controllers\AppointmentController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\SpecialtyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -26,13 +27,30 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+
+    /* Specialties */
     Route::resource('/specialties', SpecialtyController::class);
+
+    /* Doctors */
     Route::resource('/doctors', DoctorController::class);
+
+    /* Patients */
     Route::resource('/patients', PatientController::class);
+
+    /* Reports */
+    Route::get('/reports/appointment/line', [ChartController::class, 'appointments'])->name('reports.appointments');
+
+    Route::get('/reports/doctors/column', [ChartController::class, 'doctors'])->name('reports.doctors');
+
+    Route::get('/reports/doctors/column/data', [ChartController::class, 'doctorsJson']);
 });
 
 Route::middleware(['auth', 'doctor'])->group(function () {
+
+    /* schedule */
     Route::get('/schedule', [ScheduleController::class, 'edit'])->name('schedule.edit');
+
+    /* schedule-store */
     Route::post('/schedule-store', [ScheduleController::class, 'store'])->name('schedule.store');
 });
 
@@ -52,10 +70,10 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/my-appointments/{appointment}/confirm','confirm')->name('appointments.confirm');
 
-        Route::get('/my-appointments/{appointment}/cancel','formCancel');
+        Route::get('/my-appointments/{appointment}/cancel','formCancel')->name('appointments.form-cancel');
     });
 
-
+    //JSON
     Route::get('/specialties/{specialty}/doctors', [ApiSpecialtyController::class, 'doctors'])->name('appointments.doctors');
 
     Route::get('/schedule/hours', [ApiScheduleController::class, 'hours'])->name('schedule.hours');

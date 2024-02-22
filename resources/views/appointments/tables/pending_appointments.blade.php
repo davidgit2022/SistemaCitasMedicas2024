@@ -4,7 +4,7 @@
             <tr>
                 <th scope="col">Descripción</th>
                 <th scope="col">Especialidad</th>
-                @if ($role == 'paciente')
+                @if ($role == 'patient')
                     <th scope="col">Médico</th>
                 @elseif ($role == 'doctor')
                     <th scope="col">Paciente</th>
@@ -16,45 +16,45 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pendingAppointments as $cita)
+            @foreach ($pendingAppointments as $appointment)
                 <tr>
                     <th scope="row">
-                        {{ $cita->description}}
+                        {{ $appointment->FormatDescription}}
                     </th>
                     <td>
-                        {{ $cita->specialty->name}}
+                        {{ $appointment->specialty->FormatName}}
                     </td>
-                    @if ($role == 'paciente')
+                    @if ($role == 'patient')
                         <td>
-                            {{ $cita->doctor->name }}
+                            {{ $appointment->doctor->FormatName }}
                         </td>
                     @elseif ($role == 'doctor')
                         <td>
-                            {{ $cita->patient->name }}
+                            {{ $appointment->patient->FormatName }}
                         </td>
                     @endif
                     <td>
-                        {{ $cita->scheduled_date}}
+                        {{ $appointment->scheduled_date}}
                     </td>
                     <td>
-                        {{ $cita->ScheduledTime12}}
+                        {{ $appointment->ScheduledTime12}}
                     </td>
                     <td>
-                        {{ $cita->type}}
+                        {{ $appointment->FormatType}}
                     </td>
                     <td>
                         @if ($role == 'admin')
-                            <a href="{{ route('appointments.show',['appointment' => $cita->id] ) }}" class="btn btn-sm btn-info"
+                            <a href="{{ route('appointments.show',['appointment' => $appointment->id] ) }}" class="btn btn-sm btn-info"
                                 title="Ver cita"><i class="ni fas fa-eye"></i></a>
                         @endif
                         @if ($role == 'doctor' || $role == 'admin')
-                            <form action="{{ route('appointments.confirm', ['appointment' => $cita->id] ) }}" method="POST" class="d-inline-block">
+                            <form action="{{ route('appointments.confirm', ['appointment' => $appointment->id] ) }}" method="POST" class="d-inline-block">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-success" title="Confirmar cita"><i class="ni ni-check-bold"></i></button>
                             </form>
                         @endif
 
-                        <form action="{{ route('appointments.cancel',['appointment' => $cita->id] ) }}" method="POST" class="d-inline-block">
+                        <form action="{{ route('appointments.cancel',['appointment' => $appointment->id] ) }}" method="POST" class="d-inline-block">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-danger" title="Cancelar cita"><i class="ni ni-fat-delete"></i></button>
                         </form>

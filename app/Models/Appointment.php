@@ -22,24 +22,21 @@ class Appointment extends Model
         'status',
     ];
 
-    public function specialty():BelongsTo
+    /* -----------------------------Relationships----------------------------- */
+
+    public function specialty(): BelongsTo
     {
         return $this->belongsTo(Specialty::class);
     }
 
-    public function doctor():BelongsTo
+    public function doctor(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function patient():BelongsTo
+    public function patient(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getScheduledTime12Attribute()
-    {
-        return (new Carbon($this->scheduled_time))->format('g:i A');
     }
 
     public function cancellation()
@@ -47,25 +44,73 @@ class Appointment extends Model
         return $this->hasOne(CancelledAppointment::class);
     }
 
+    /*  ------------------------------Get and Set------------------------------ */
+
+    public function getScheduledTime12Attribute()
+    {
+        return (new Carbon($this->scheduled_time))->format('g:i A');
+    }
+
     public function getFormatStatusAttribute()
     {
         $status = $this->attributes['status'];
+        $placeholder = '<span class="badge %s"><i class="%s">&nbsp%s</span>';
+        $class = '';
+        $icon = '';
+        $text = '';
 
-        if($status == 'reserved'){
-            $status = 'Reservada';
-        }elseif($status == 'confirmed'){
-            $status = 'Confirmada';
-        }elseif($status == 'completed'){
-            $status = 'Completada';
-        }elseif($status == 'cancelled'){
-            $status = 'Cancelada';
+        switch ($status) {
+            case 'reserved':
+                $class = 'badge-warning';
+                $icon = 'fas fa-clock';
+                $text = 'Reservada';
+                break;
+
+            case 'confirmed':
+                $class = 'badge-success';
+                $icon = 'fas fa-check';
+                $text = 'Confirmada';
+                break;
+
+            case 'completed':
+                $class = 'badge-success';
+                $icon = 'fas fa-times';
+                $text = 'Completada';
+                break;
+
+            case 'cancelled':
+                $class = 'badge-danger';
+                $icon = 'fas fa-times';
+                $text = 'Suspendido';
+                break;
+
+            default:
+                $class = 'badge-danger';
+                $icon = 'fas fa-question';
+                $text = 'Cancelada';
+                break;
         }
-        return $status;
+
+        return sprintf($placeholder, $class, $icon, $text);
+    }
+
+    public function getFormatTypeAttribute()
+    {
+        $type = $this->attributes['type'];
+
+        return ucfirst($type);
+    }
+
+    public function getFormatDescriptionAttribute()
+    {
+        $description = $this->attributes['description'];
+
+        return ucfirst($description);
     }
 
     /*--------------------------------- Scope ---------------------------------*/
 
-    /* Admin */
+    /* ----------------------------------Admin---------------------------------- */
     public function scopeConfirmedAdmin($query)
     {
         return $query->where('status', 'confirmed');
@@ -81,44 +126,45 @@ class Appointment extends Model
         return $query->whereIn('status', ['completed', 'cancelled']);
     }
 
-    /* Doctor */
+    /* -----------------------------------Doctor----------------------------------- */
     public function scopeConfirmedDoctor($query)
     {
         return $query->where('status', 'confirmed')
-        ->where('doctor_id', auth()->id());
+            ->where('doctor_id', auth()->id());
     }
 
     public function scopeReservedDoctor($query)
     {
         return $query->where('status', 'reserved')
-        ->where('doctor_id', auth()->id());
+            ->where('doctor_id', auth()->id());
     }
 
     public function scopeCompletedDoctor($query)
     {
         return $query->whereIn('status', ['completed', 'cancelled'])
-        ->where('doctor_id', auth()->id());
+            ->where('doctor_id', auth()->id());
     }
 
-    /* Patient */
+    /* ------------------------------Patient------------------------------ */
 
     public function scopeConfirmedPatient($query)
     {
         return $query
-        ->where('status', 'confirmed')
-        ->where('patient_id', auth()->id());
+            ->where('status', 'confirmed')
+            ->where('patient_id', auth()->id());
     }
 
-    public function scopeReservedPatient($query){
+    public function scopeReservedPatient($query)
+    {
         return $query
-        ->where('status', 'reserved')
-        ->where('patient_id', auth()->id());
+            ->where('status', 'reserved')
+            ->where('patient_id', auth()->id());
     }
 
     public function scopeCompletedPatient($query)
     {
         return $query
-        ->whereIn('status', ['completed', 'cancelled'])
-        ->where('patient_id', auth()->id());
+            ->whereIn('status', ['completed', 'cancelled'])
+            ->where('patient_id', auth()->id());
     }
 }
