@@ -51,6 +51,22 @@ class Appointment extends Model
         return (new Carbon($this->scheduled_time))->format('g:i A');
     }
 
+    /* public function getFormatStatusAttribute()
+    {
+        $status = $this->attributes['status'];
+
+        if($status == 'reserved'){
+            $status = 'Reservada';
+        }elseif($status == 'confirmed'){
+            $status = 'Confirmada';
+        }elseif($status == 'completed'){
+            $status = 'Completada';
+        }elseif($status == 'cancelled'){
+            $status = 'Cancelada';
+        }
+        return $status;
+    } */
+
     public function getFormatStatusAttribute()
     {
         $status = $this->attributes['status'];

@@ -26,7 +26,6 @@ class AppointmentController extends Controller
         $result =  $this->appointmentServices->getListAppointments();
 
         return view('appointments.index',[
-
             'confirmedAppointments' => $result['confirmedAppointments'],
             'pendingAppointments' => $result['pendingAppointments'],
             'oldAppointments' => $result['oldAppointments'],
