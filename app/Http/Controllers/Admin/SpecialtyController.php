@@ -24,7 +24,7 @@ class SpecialtyController extends Controller
     {
         $result = $this->specialtyServices->getAllSpecialties($request);
 
-        return view('specialties.index', [
+        return view('admin.specialties.index', [
             'specialties' => $result['specialties'],
             'filterValue' => $result['filterValue']
         ]);
@@ -33,7 +33,7 @@ class SpecialtyController extends Controller
 
     public function create(Specialty $specialty):View
     {
-        return view('specialties.create', compact('specialty'));
+        return view('admin.specialties.create', compact('specialty'));
     }
 
 
@@ -53,7 +53,7 @@ class SpecialtyController extends Controller
 
     public function edit(Specialty $specialty): View
     {
-        return view('specialties.edit', compact('specialty'));
+        return view('admin.specialties.edit', compact('specialty'));
     }
 
     public function update(UpdateSpecialtyRequest $request, Specialty $specialty): RedirectResponse

@@ -28,7 +28,7 @@ class ChartController extends Controller
             $counts[$index] = $mountCount['count'];
         }
 
-        return view('charts.appointments', compact('counts'));
+        return view('admin.charts.appointments', compact('counts'));
     }
 
     public function doctors()
@@ -36,7 +36,7 @@ class ChartController extends Controller
         $now = Carbon::now();
         $end = $now->format('Y-m-d');
         $start = $now->subYear()->format('Y-m-d');
-        return view('charts.doctors', compact('end', 'start'));
+        return view('admin.charts.doctors', compact('end', 'start'));
     }
 
     public function doctorsJson(Request $request)

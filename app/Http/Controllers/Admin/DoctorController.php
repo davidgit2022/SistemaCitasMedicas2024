@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Doctor\StoreDoctorRequest;
 use App\Http\Requests\Doctor\UpdateDoctorRequest;
+use App\Models\Specialty;
 use App\Models\User;
 use App\Services\DoctorServices;
 use Illuminate\View\View;
@@ -23,7 +24,7 @@ class DoctorController extends Controller
     {
         $result = $this->doctorServices->getAllDoctors($request);
 
-        return view('doctors.index', [
+        return view('admin.doctors.index', [
             'filterValue' => $result['filterValue'],
             'doctors' => $result['doctors']
         ]);
@@ -37,7 +38,7 @@ class DoctorController extends Controller
     {
         $result = $this->doctorServices->viewCreateDoctor($doctor);
          
-        return view('doctors.create', [
+        return view('admin.doctors.create', [
             'doctor' => $doctor,
             'specialties' => $result['specialties'],
             'idsSpecialties' => $result['idsSpecialties'],
@@ -54,16 +55,17 @@ class DoctorController extends Controller
     }
 
 
-    public function show(User $user)
+    public function show(User $doctor) : View
     {
-        //
+        $specialties = $doctor->specialties()->select('name')->get();
+        return view('admin.doctors.show', compact('doctor', 'specialties'));
     }
 
 
     public function edit(User $doctor): View
     {
         $result = $this->doctorServices->viewEditDoctor($doctor);
-        return view('doctors.edit',[
+        return view('admin.doctors.edit',[
             'doctor' => $doctor,
             'specialties' => $result['specialties'],
             'idsSpecialties' => $result['idsSpecialties']

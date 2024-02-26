@@ -1,4 +1,4 @@
-@vite(['resources/js/app.js'])
+@vite(['resources/css/app.css','resources/js/app.js'])
 <!-- Favicon -->
 <link href="{{ asset('img/brand/favicon.png') }}" rel="icon" type="image/png">
 

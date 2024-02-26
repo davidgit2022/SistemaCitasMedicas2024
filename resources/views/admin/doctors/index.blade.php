@@ -50,6 +50,10 @@
                         <td>
                             @component('components.buttons-actions')
                             
+                                @slot('routeShow')
+                                    {{route('doctors.show', $doctor->id)}}
+                                @endslot
+                                
                                 @slot('routeEdit')
                                     {{ route('doctors.edit', $doctor) }}
                                 @endslot

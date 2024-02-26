@@ -1,5 +1,6 @@
 <div class="btn-group" role="group" aria-label="Basic example">
-    <a href="#" class="btn btn-success btn-sm" title="ver"><i class="fas fa-eye"></i></a>
+    
+    <a href="{{ $routeShow }}" class="btn btn-success btn-sm" title="ver"><i class="fas fa-eye"></i></a>
 
     <a href="{{ $routeEdit }}" class="btn btn-primary btn-sm rounded" title="Editar"><i class="fas fa-edit"></i></a>
 

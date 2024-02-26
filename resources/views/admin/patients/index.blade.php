@@ -50,6 +50,9 @@
                         </td>
                         <td>
                             @component('components.buttons-actions')
+                                @slot('routeShow')
+                                {{ route('patients.edit', $patient) }}
+                                @endslot
                                 @slot('routeEdit')
                                     {{ route('patients.edit', $patient) }}
                                 @endslot
