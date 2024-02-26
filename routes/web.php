@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\ChartController;
+use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\Admin\SpecialtyController;
 use App\Http\Controllers\Api\ScheduleController as ApiScheduleController;
 use App\Http\Controllers\Api\SpecialtyController as ApiSpecialtyController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Doctor\ScheduleController;
-use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SpecialtyController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,11 +39,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/patients', PatientController::class);
 
     /* Reports */
-    Route::get('/reports/appointment/line', [ChartController::class, 'appointments'])->name('reports.appointments');
+    
+    Route::controller(ChartController::class)->group(function () {
 
-    Route::get('/reports/doctors/column', [ChartController::class, 'doctors'])->name('reports.doctors');
+        Route::get('/reports/appointment/line', 'appointments')->name('reports.appointments');
 
-    Route::get('/reports/doctors/column/data', [ChartController::class, 'doctorsJson']);
+        Route::get('/reports/doctors/column', 'doctors')->name('reports.doctors');
+
+        Route::get('/reports/doctors/column/data', 'doctorsJson')->name('reports.doctors-json');
+
+    });
 });
 
 Route::middleware(['auth', 'doctor'])->group(function () {

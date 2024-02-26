@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
-
     public function __construct(private AppointmentServices $appointmentServices)
     {
         $this->appointmentServices = $appointmentServices;
@@ -109,5 +108,29 @@ class AppointmentController extends Controller
             'appointment' => $appointment, 
             'role' => $role
         ]);
+    }
+
+    public function validateSchedule(StoreAppointmentRequest $request, ScheduleServiceInterface $scheduleServiceInterface)
+    {
+        $validator = $request->validated();
+
+        $date = $request->input('scheduled_date');
+        $doctorId = $request->input('doctor_id');
+        $scheduled_time = $request->input('scheduled_time');
+
+        if ($date && $doctorId && $scheduled_time) {
+            $start = new Carbon($scheduled_time);
+
+            if (!$scheduleServiceInterface->isAvailableInterval($date, $doctorId, $start)) {
+                $validator->errors()->add(
+                    'availableTime',
+                    'La hora seleccionada ya se encuentra reservada por otro paciente.'
+                );
+
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+        }
     }
 }

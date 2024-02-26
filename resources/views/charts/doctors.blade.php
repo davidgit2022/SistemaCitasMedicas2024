@@ -46,6 +46,5 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
-        <script src="{{ asset('js/charts/doctors.js') }}"></script>
     @endpush
 @endsection

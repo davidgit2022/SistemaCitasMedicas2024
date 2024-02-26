@@ -53,6 +53,7 @@ class DoctorServices {
         $doctor->roles()->sync(2);
 
         $doctor->specialties()->attach($request->input('specialties'));
+
         return $doctor;
     }
 

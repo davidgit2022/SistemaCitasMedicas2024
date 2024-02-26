@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Patient\StorePatientRequest;
 use App\Http\Requests\Patient\UpdatePatientRequest;
 use App\Models\User;
@@ -9,7 +10,6 @@ use App\Services\PatientServices;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-
 
 class PatientController extends Controller
 {
@@ -58,14 +58,14 @@ class PatientController extends Controller
     {
         $this->patientServices->updatePatient($request, $patient);
 
-        $notification = 'El paciente se ha creado correctamente.';
+        $notification = 'El paciente se ha actualizado correctamente.';
         return redirect()->route('patients.index')->with(compact('notification'));
     }
 
 
-    public function destroy(User $doctor): RedirectResponse
+    public function destroy(User $patient): RedirectResponse
     {
-        $doctor->delete();
+        $patient->delete();
 
         $notification = 'El paciente se ha eliminado correctamente.';
         return redirect()->route('patients.index')->with(compact('notification'));
