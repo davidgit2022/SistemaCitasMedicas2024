@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Exitoso</title>
-    {{-- <style>
+    <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -46,7 +46,7 @@
             font-weight: bold;
             margin-right: 5px;
         }
-    </style> --}}
+    </style>
 </head>
 
 <body>

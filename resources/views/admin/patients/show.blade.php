@@ -1,13 +1,13 @@
 @extends('layouts.theme.app')
 
-@section('title', 'Detalles del doctor')
+@section('title', 'Detalles del paciente')
 
 @section('content')
     @component('components.table-detail-user')
-        @slot('nameModule', 'Detalles doctor')
+        @slot('nameModule', 'Detalles paciente')
 
         @slot('routeIndex')
-            {{ route('doctors.index')}}
+            {{ route('patients.index')}}
         @endslot
 
         @slot('btnBack', 'Regresar')
@@ -18,7 +18,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
-                    <th scope="col">Especialidades</th>
                     <th scope="col">Correo electrónico</th>
                     <th scope="col">Celular</th>
                     <th scope="col">Foto</th>
@@ -27,36 +26,28 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ $doctor->id }}
+                        {{ $patient->id }}
                     </td>
                     <td>
-                        {{ $doctor->FormatName }}
+                        {{ $patient->FormatName }}
                     </td>
                     <td>
-                        {{ $doctor->FormatLastName }}
+                        {{ $patient->FormatLastName }}
                     </td>
                     <td>
-                        @foreach ($specialties as $specialty)
-                            {{ $specialty->FormatName}}
-                            @if (!$loop->last)
-                                    {{ ', '}}
-                                @endif
-                        @endforeach
+                        {{ $patient->email }}
                     </td>
                     <td>
-                        {{ $doctor->email }}
-                    </td>
-                    <td>
-                        {{ $doctor->mobile }}
+                        {{ $patient->mobile }}
                     </td>
                     <td>
                         <button type="button" class="no-border" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 <div class="img-button">
-                                    @if ($doctor->photo == null)
+                                    @if ($patient->photo == null)
                                         <img src="{{ asset('img/perfil_default.png') }}" alt="" class="img-fluid">
                                     @else
-                                        <img src="{{ asset('storage/' . $doctor->photo) }}" alt=""
+                                        <img src="{{ asset('storage/' . $patient->photo) }}" alt=""
                                             class="img-fluid">
                                     @endif
                                 </div>
@@ -66,5 +57,6 @@
                 </tr>
             </tbody>
         @endslot
+        @slot('pagination')
     @endcomponent
 @endsection

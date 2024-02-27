@@ -51,7 +51,7 @@ class Appointment extends Model
         return (new Carbon($this->scheduled_time))->format('g:i A');
     }
 
-    /* public function getFormatStatusAttribute()
+    public function getFormatStatusAttribute()
     {
         $status = $this->attributes['status'];
 
@@ -65,9 +65,9 @@ class Appointment extends Model
             $status = 'Cancelada';
         }
         return $status;
-    } */
+    }
 
-    public function getFormatStatusAttribute()
+    /* public function getFormatStatusAttribute()
     {
         $status = $this->attributes['status'];
         $placeholder = '<span class="badge %s"><i class="%s">&nbsp%s</span>';
@@ -108,7 +108,7 @@ class Appointment extends Model
         }
 
         return sprintf($placeholder, $class, $icon, $text);
-    }
+    } */
 
     public function getFormatTypeAttribute()
     {

@@ -18,10 +18,6 @@
 
         @slot('placeholder', 'Buscar por nombre de doctor')
 
-        @slot('data')
-            {{ $doctors }}
-        @endslot
-
         @slot('table')
             <thead class="thead-light">
                 <tr>
@@ -49,11 +45,11 @@
                         </td>
                         <td>
                             @component('components.buttons-actions')
-                            
-                                @slot('routeShow')
-                                    {{route('doctors.show', $doctor->id)}}
+                                @slot('btnShow')
+                                    <a href="{{ route('doctors.show', $doctor) }}" class="btn btn-success btn-sm" title="ver"><i
+                                            class="fas fa-eye"></i></a>
                                 @endslot
-                                
+
                                 @slot('routeEdit')
                                     {{ route('doctors.edit', $doctor) }}
                                 @endslot
@@ -61,12 +57,16 @@
                                 @slot('routeDestroy')
                                     {{ route('doctors.destroy', $doctor) }}
                                 @endslot
-                                
+
+                                @slot('funConfirm')
+                                    <button type="submit"class="btn btn-danger btn-sm" title="Eliminar"><i
+                                            class="fas fa-trash"></i></button>
+                                @endslot
                             @endcomponent
                         </td>
                     </tr>
                 @empty
-                    @include('doctors.include.not-result')
+                    @include('admin.doctors.include.not-result')
                 @endforelse
             </tbody>
         @endslot
@@ -74,4 +74,7 @@
             {{ $doctors->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }}
         @endslot
     @endcomponent
+    @push('scripts')
+        @include('admin.partials.sweetAlert2')
+    @endpush
 @endsection

@@ -21,6 +21,8 @@ class PatientController extends Controller
     {
         $result = $this->patientServices->getAllPatients($request);
 
+
+
         return view('admin.patients.index',[
             'filterValue' => $result['filterValue'],
             'patients' => $result['patients']
@@ -43,9 +45,9 @@ class PatientController extends Controller
     }
 
 
-    public function show(User $user)
+    public function show(User $patient):View
     {
-        
+        return view('admin.patients.show', compact('patient'));
     }
 
     public function edit(User $patient):View

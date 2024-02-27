@@ -18,10 +18,6 @@
 
         @slot('placeholder', 'Buscar por nombre de paciente')
 
-        @slot('data')
-            {{ $patients }}
-        @endslot
-
 
         @slot('table')
             <thead class="thead-light">
@@ -50,8 +46,12 @@
                         </td>
                         <td>
                             @component('components.buttons-actions')
+                                @slot('btnShow')
+                                    <a href="{{ route('patients.show', $patient) }}" class="btn btn-success btn-sm" title="ver"><i
+                                            class="fas fa-eye"></i></a>
+                                @endslot
                                 @slot('routeShow')
-                                {{ route('patients.edit', $patient) }}
+                                    {{ route('patients.edit', $patient) }}
                                 @endslot
                                 @slot('routeEdit')
                                     {{ route('patients.edit', $patient) }}
@@ -60,11 +60,15 @@
                                 @slot('routeDestroy')
                                     {{ route('patients.destroy', $patient) }}
                                 @endslot
+                                @slot('funConfirm')
+                                    <button type="submit"class="btn btn-danger btn-sm" title="Eliminar"><i
+                                            class="fas fa-trash"></i></button>
+                                @endslot
                             @endcomponent
                         </td>
                     </tr>
                 @empty
-                    @include('patients.include.not-result')
+                    @include('admin.patients.include.not-result')
                 @endforelse
             </tbody>
         @endslot
@@ -72,4 +76,7 @@
             {{ $patients->appends(['filterValue' => $filterValue])->links('pagination::bootstrap-4') }}
         @endslot
     @endcomponent
+    @push('scripts')
+        @include('admin.partials.sweetAlert2')
+    @endpush
 @endsection

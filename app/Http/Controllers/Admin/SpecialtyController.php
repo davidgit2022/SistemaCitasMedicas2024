@@ -46,9 +46,9 @@ class SpecialtyController extends Controller
     }
 
 
-    public function show(Specialty $specialty)
+    public function show(Specialty $specialty) : View
     {
-        //
+        return view('admin.specialties.show', compact('specialty') );
     }
 
     public function edit(Specialty $specialty): View
