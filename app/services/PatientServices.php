@@ -39,6 +39,15 @@ class PatientServices{
             'mobile' => $request->mobile,
         ]);
 
+        
+
+        if($request->photo){
+            $fileName = uniqid() . '_.' . $request->photo->extension();
+            $request->photo->move(public_path('img/profiles/patients'), $fileName);
+            $patient->photo = 'img/profiles/patients/' . $fileName;
+            $patient->save();
+        }
+
         $patient->roles()->sync(3);
 
         return $patient;

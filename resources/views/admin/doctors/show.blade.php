@@ -7,7 +7,7 @@
         @slot('nameModule', 'Detalles doctor')
 
         @slot('routeIndex')
-            {{ route('doctors.index')}}
+            {{ route('doctors.index') }}
         @endslot
 
         @slot('btnBack', 'Regresar')
@@ -37,10 +37,10 @@
                     </td>
                     <td>
                         @foreach ($specialties as $specialty)
-                            {{ $specialty->FormatName}}
+                            {{ $specialty->FormatName }}
                             @if (!$loop->last)
-                                    {{ ', '}}
-                                @endif
+                                {{ ', ' }}
+                            @endif
                         @endforeach
                     </td>
                     <td>
@@ -50,21 +50,23 @@
                         {{ $doctor->mobile }}
                     </td>
                     <td>
-                        <button type="button" class="no-border" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <div class="img-button">
-                                    @if ($doctor->photo == null)
-                                        <img src="{{ asset('img/perfil_default.png') }}" alt="" class="img-fluid">
-                                    @else
-                                        <img src="{{ asset('storage/' . $doctor->photo) }}" alt=""
-                                            class="img-fluid">
-                                    @endif
-                                </div>
-                            </button>
+                        <button type="button" class="no-border" data-bs-toggle="modal" data-toggle="modal"
+                            data-target="#exampleModal">
+                            <div class="img-button">
+                                @if ($doctor->photo == null)
+                                    <img src="{{ asset('img/perfil_default.png') }}" alt="not-available" class="img-fluid">
+                                @else
+                                    <img src="{{ asset($doctor->photo) }}" alt="" class="img-fluid">
+                                @endif
+                            </div>
+                        </button>
                     </td>
-                    
                 </tr>
             </tbody>
+            <!-- Modal -->
+            @include('admin.doctors.modal')
         @endslot
+
     @endcomponent
+
 @endsection

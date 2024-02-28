@@ -24,7 +24,7 @@ class UpdateDoctorRequest extends FormRequest
             'dni' => 'required|numeric|regex:/^[0123456789]+$/',
             'address' => 'required',
             'mobile' => 'required|numeric|digits:10',
-            'photo' => 'nullable|image|mimes:png,jpg'
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 
@@ -37,8 +37,8 @@ class UpdateDoctorRequest extends FormRequest
             'specialties' => 'especialidad',
             'dni' => 'cedula',
             'address' => 'dirección',
-            'mobile' => 'cedular',
-            'photo' => 'nullable'
+            'mobile' => 'celular',
+            'photo' => 'foto'
         ];
     }
 }

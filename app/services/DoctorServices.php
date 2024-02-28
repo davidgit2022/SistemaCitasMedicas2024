@@ -50,6 +50,15 @@ class DoctorServices {
             'mobile' => $request->mobile,
         ]);
 
+        if($request->photo){
+            $fileName = uniqid() . '_.' . $request->photo->extension();
+            $request->photo->move(public_path('img/profiles/doctors'), $fileName);
+            $doctor->photo = 'img/profiles/doctors/' . $fileName;
+            $doctor->save();
+        }
+
+        
+
         $doctor->roles()->sync(2);
 
         $doctor->specialties()->attach($request->input('specialties'));
@@ -70,6 +79,7 @@ class DoctorServices {
 
     public function updateDoctor(UpdateDoctorRequest $request, User $doctor)
     {
+        
         $doctor->update([
             'name' => $request->name,
             'last_name' => $request->lastName,
@@ -78,6 +88,26 @@ class DoctorServices {
             'address' => $request->address,
             'mobile' => $request->mobile,
         ]);
+
+        
+
+        if ($request->photo) {
+            $fileName = uniqid() . '_.' . $request->photo->extension();
+            $request->photo->move(public_path('img/profiles/doctors'), $fileName);
+            $photoOld = $doctor->photo;
+
+            $doctor->photo = 'img/profiles/doctors/' . $fileName;
+            $doctor->save();
+            
+            if ($photoOld != null) {
+                $oldFilePath = public_path($photoOld);
+        
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+
+        }
 
         $doctor->specialties()->sync($request->input('specialties'));
 

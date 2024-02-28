@@ -99,6 +99,16 @@
     @enderror
 </div>
 
+{{-- Photo --}}
+<div class="form-group">
+    <label for="mobile">Foto:</label>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFileLang" lang="en" name="photo">
+        <label class="custom-file-label" for="customFileLang">Selecciona el archivo</label>
+    </div>
+</div>
+
+
 {{-- Password --}}
 {{-- <div class="form-group">
     <label for="password">Contraseña:</label>

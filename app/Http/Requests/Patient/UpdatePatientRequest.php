@@ -21,7 +21,7 @@ class UpdatePatientRequest extends FormRequest
             'dni' => 'required|numeric|regex:/^[0123456789]+$/',
             'address' => 'required',
             'mobile' => 'required|numeric|digits:10',
-            'photo' => 'nullable|image|mimes:png,jpg'
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 
@@ -34,7 +34,7 @@ class UpdatePatientRequest extends FormRequest
             'dni' => 'cedula',
             'address' => 'dirección',
             'mobile' => 'cedular',
-            'photo' => 'nullable'
+            'photo' => 'foto'
         ];
     }
 }

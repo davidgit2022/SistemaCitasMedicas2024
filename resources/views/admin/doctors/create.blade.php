@@ -8,7 +8,7 @@
         <div class="card-body">
             @include('admin.doctors.partials.error-form')
             
-            <form action="{{ route('doctors.store') }}" method="POST">
+            <form action="{{ route('doctors.store') }}" method="POST" enctype="multipart/form-data">
                 @include('admin.doctors.include.form')
             </form>
         </div>
