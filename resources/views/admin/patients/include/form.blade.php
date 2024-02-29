@@ -38,6 +38,32 @@
     @enderror
 </div>
 
+@if ($patient->id == 0)
+    {{-- Password --}}
+<div class="form-group">
+    <label for="password">Contraseña:</label>
+    <input type="password" class="form-control" name="password" id="password" required>
+
+    @error('password')
+        <span class="text-danger">
+            <span>*{{ $message }}</span>
+        </span>
+    @enderror
+</div>
+
+{{-- Confirmation Password --}}
+<div class="form-group">
+    <label for="password_confirmation">Confirmar contraseña:</label>
+    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
+
+    @error('password_confirmation')
+        <span class="text-danger">
+            <span>*{{ $message }}</span>
+        </span>
+    @enderror
+</div>
+@endif
+
 {{-- DNI --}}
 
 <div class="form-group">
@@ -77,14 +103,6 @@
     @enderror
 </div>
 
-{{-- Photo --}}
-<div class="form-group">
-    <label for="mobile">Foto:</label>
-    <div class="custom-file">
-        <input type="file" class="custom-file-input" id="customFileLang" lang="en" name="photo">
-        <label class="custom-file-label" for="customFileLang">Selecciona el archivo</label>
-    </div>
-</div>
 
 
 <button type="submit" class="btn btn-sm btn-primary">{{ $patient->id > 0 ? 'Actualizar' : 'Guardar'}}</button>

@@ -20,6 +20,7 @@ class StorePatientRequest extends FormRequest
             'lastName' => 'required|regex:/^[a-zA-ZáéíóúñÑÁÉÍÓÚ\s]+$/',
             'email' => 'required|unique:users,email',
             'dni' => 'required|numeric|regex:/^[0123456789]+$/',
+            'password' => 'required|string|min:8|confirmed|regex:/^[a-zA-Z0123456789]+$/',
             'address' => 'required',
             'mobile' => 'required|numeric|digits:10',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
@@ -35,6 +36,7 @@ class StorePatientRequest extends FormRequest
             'email' => 'correo electrónico',
             'dni' => 'cedula',
             'address' => 'dirección',
+            'password' => 'contraseña',
             'mobile' => 'celular',
             'photo' => 'foto'
         ];

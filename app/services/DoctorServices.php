@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Specialty;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\Doctor\StoreDoctorRequest;
 use App\Http\Requests\Doctor\UpdateDoctorRequest;
@@ -49,20 +48,18 @@ class DoctorServices {
             'name' => $request->name,
             'last_name' => $request->lastName,
             'email' => $request->email,
-            'password' => password_hash(Str::random(8), PASSWORD_DEFAULT),
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'dni' => $request->dni,
             'address' => $request->address,
             'mobile' => $request->mobile,
         ]);
 
-        if($request->photo){
+        /* if($request->photo){
             $fileName = uniqid() . '_.' . $request->photo->extension();
             $request->photo->move(public_path('img/profiles/doctors'), $fileName);
             $doctor->photo = 'img/profiles/doctors/' . $fileName;
             $doctor->save();
-        }
-
-        
+        } */
 
         $doctor->roles()->sync(2);
 
@@ -96,7 +93,7 @@ class DoctorServices {
 
         
 
-        if ($request->photo) {
+        /* if ($request->photo) {
             $fileName = uniqid() . '_.' . $request->photo->extension();
             $request->photo->move(public_path('img/profiles/doctors'), $fileName);
             $photoOld = $doctor->photo;
@@ -112,7 +109,7 @@ class DoctorServices {
                 }
             }
 
-        }
+        } */
 
         $doctor->specialties()->sync($request->input('specialties'));
 

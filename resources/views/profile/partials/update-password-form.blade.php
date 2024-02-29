@@ -52,21 +52,37 @@
 <div class="pl-lg-4">
     <div class="row">
         <div class="col-md-12">
+            {{-- Password --}}
             <div class="form-group">
-                <label class="form-control-label" for="input-address">Contraseña</label>
-                <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address"
-                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+
+                @error('password')
+                    <span class="text-danger">
+                        <span>*{{ $message }}</span>
+                    </span>
+                @enderror
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
+            {{-- Confirmation Password --}}
             <div class="form-group">
-                <label class="form-control-label" for="input-address">Nueva contraseña</label>
-                <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address"
-                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                <label for="password_confirmation">Confirmar contraseña:</label>
+                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
+                    required>
+
+                @error('password_confirmation')
+                    <span class="text-danger">
+                        <span>*{{ $message }}</span>
+                    </span>
+                @enderror
             </div>
         </div>
     </div>
 </div>
+
+
+
 <hr class="my-4" />

@@ -43,8 +43,7 @@
             <div class="row">
                 <div class="col-lg-7 col-md-10">
                     <h1 class="display-2 text-white">Hola {{$user->FormatName}} </h1>
-                    <p class="text-white mt-0 mb-5">Esta es tu página de perfil. Puedes ver el progreso que has hecho con
-                        tu trabajo y gestionar tus proyectos o tareas asignadas</p>
+                    <p class="text-white mt-0 mb-5">Esta es tu página de perfil. Puedes realizar los ajustes, que creas convenientes.</p>
                 </div>
             </div>
         </div>
@@ -93,9 +92,6 @@
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Mi cuenta</h3>
-                            </div>
-                            <div class="col-4 text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">Configuraciones</a>
                             </div>
                         </div>
                     </div>

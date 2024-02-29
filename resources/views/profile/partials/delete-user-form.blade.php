@@ -56,8 +56,56 @@
  --}}
 <h6 class="heading-small text-muted mb-4">Eliminar cuenta</h6>
 <div class="pl-lg-4">
-    <div class="form-group">
-        <label>About Me</label>
-        <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+    <header>
+        <p class="mt-1 text-muted">
+            {{ __('Una vez eliminada su cuenta, todos sus recursos y datos se borrarán permanentemente. Antes de eliminar su cuenta, descargue los datos o la información que desee conservar.') }}
+        </p>
+    </header>
+
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmUserDeletionModal">
+        {{ __('Eliminar Cuenta') }}
+    </button>
+
+    <div class="modal fade" id="confirmUserDeletionModal" tabindex="-1" aria-labelledby="confirmUserDeletionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" action="{{ route('profile.destroy') }}" class="p-4">
+                    @csrf
+                    @method('delete')
+
+                    <h2 class="h4 fw-medium text-dark">
+                        {{ __('Are you sure you want to delete your account?') }}
+                    </h2>
+
+                    <p class="mt-1 text-muted">
+                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                    </p>
+
+                    <div class="mt-3">
+                        <label for="password" class="visually-hidden">{{ __('Password') }}</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="{{ __('Password') }}" required>
+
+                        @error('userDeletion.password')
+                            <div class="text-danger mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">
+                            {{ __('Cancel') }}
+                        </button>
+
+                        <button type="submit" class="btn btn-danger">
+                            {{ __('Delete Account') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
+<section class="py-6">
+    
+</section>
+

@@ -72,30 +72,13 @@
     @csrf
     @method('patch')
     <div class="pl-lg-4">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-control-label" for="username">Nombre de usuario</label>
-                    <input type="text" class="form-control 
-                         id="username" name="username"
-                        form-control-alternative" value="{{ old('name',$user->FormatName) }}" required autofocus
-                        autocomplete="username">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-control-label" for="email">Correo electrónico</label>
-                    <input type="email" id="email" class="form-control form-control-alternative"
-                        value="{{ old('email', $user->email) }}" placeholder="Correo electrónico" required autocomplete="name">
-                </div>
-            </div>
-        </div>
+        {{-- name and lastName --}}
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <label class="form-control-label" for="input-first-name">Nombre</label>
                     <input type="text" id="input-first-name" class="form-control form-control-alternative"
-                        placeholder="Primer nombre" value="{{ old('name',$user->FormatName) }}"">
+                        placeholder="Primer nombre" value="{{ old('name', $user->FormatName) }}"">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -104,6 +87,59 @@
                     <input type="text" id="input-last-name" class="form-control form-control-alternative"
                         placeholder="Apellido" value="{{ old('lastName', $user->FormatLastName) }}">
                 </div>
+            </div>
+        </div>
+
+        {{-- email and dni --}}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="email">Correo electrónico</label>
+                    <input type="email" id="email" class="form-control form-control-alternative"
+                        value="{{ old('email', $user->email) }}" placeholder="Correo electrónico" required
+                        autocomplete="name">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="username">Cedula</label>
+                    <input type="text" class="form-control 
+                         id="dni" name="dni"
+                        form-control-alternative" value="{{ old('dni', $user->dni) }}" required autofocus
+                        autocomplete="dni">
+                </div>
+            </div>
+
+        </div>
+
+        {{-- address and mobile --}}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="email">Dirección</label>
+                    <input type="address" id="address" class="form-control form-control-alternative"
+                        value="{{ old('address', $user->address) }}" placeholder="Dirección" required
+                        autocomplete="address">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="mobile">Celular</label>
+                    <input type="text" class="form-control 
+                         id="mobile" name="mobile"
+                        form-control-alternative" value="{{ old('mobile', $user->mobile) }}" required autofocus
+                        autocomplete="mobile">
+                </div>
+            </div>
+
+        </div>
+
+        {{-- Photo --}}
+        <div class="row col-lg-12">
+            <label for="mobile">Foto:</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFileLang" lang="en" name="photo">
+                <label class="custom-file-label" for="customFileLang">Selecciona el archivo</label>
             </div>
         </div>
     </div>
