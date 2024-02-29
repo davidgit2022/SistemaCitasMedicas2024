@@ -15,7 +15,10 @@ class PatientServices{
         $filterValue = $request->input('filterValue');
 
         if (! empty($filterValue)) {
-            $patientsFilter = User::where('name', 'LIKE', '%' . $filterValue . '%' );
+            $patientsFilter = User::where('name', 'LIKE', '%' . $filterValue . '%' )
+            ->orWhere('last_name', 'LIKE', '%' . $filterValue . '%')
+            ->orWhere('email', 'LIKE', '%' . $filterValue . '%')
+            ->orWhere('dni', 'LIKE', '%' . $filterValue . '%');
             $patients = $patientsFilter->role('patient')->latest()->paginate($this->pagination);
         }else{
             $patients = User::patient()->latest()->paginate($this->pagination);
@@ -62,6 +65,22 @@ class PatientServices{
             'address' => $request->address,
             'mobile' => $request->mobile,
         ]);
+
+        if($request->photo){
+            $fileName = uniqid() . '_.' . $request->photo->extension();
+            $request->photo->move(public_path('img/profiles/patients'), $fileName);
+            $photoOld = $request->photo;
+
+            $patient->photo = 'img/profiles/patients/' . $fileName;
+            $patient->save();
+
+            if ($photoOld != null) {
+                $oldFilePath = public_path($photoOld);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+        }
 
         return $patient;
 

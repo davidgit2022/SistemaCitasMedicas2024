@@ -16,7 +16,7 @@
             {{ route('doctors.index') }}
         @endslot
 
-        @slot('placeholder', 'Buscar por nombre de doctor')
+        @slot('placeholder', 'Buscar doctor')
 
         @slot('table')
             <thead class="thead-light">
@@ -24,7 +24,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Correo electrónico</th>
-                    <th scope="col">Celular</th>
+                    <th scope="col">Cedula</th>
                     <th scope="col">Accion</th>
                 </tr>
             </thead>
@@ -41,7 +41,7 @@
                             {{ $doctor->email }}
                         </td>
                         <td>
-                            {{ $doctor->mobile }}
+                            {{ $doctor->dni }}
                         </td>
                         <td>
                             @component('components.buttons-actions')

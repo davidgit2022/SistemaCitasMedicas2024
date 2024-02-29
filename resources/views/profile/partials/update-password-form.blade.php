@@ -1,4 +1,4 @@
-<section>
+{{-- <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Password') }}
@@ -46,3 +46,27 @@
         </div>
     </form>
 </section>
+ --}}
+
+<h6 class="heading-small text-muted mb-4">Actualizar contraseña</h6>
+<div class="pl-lg-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="form-control-label" for="input-address">Contraseña</label>
+                <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address"
+                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="form-control-label" for="input-address">Nueva contraseña</label>
+                <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address"
+                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="my-4" />

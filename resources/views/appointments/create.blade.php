@@ -4,10 +4,10 @@
 
 @section('content')
     @component('components.appointment-component')
-        @slot('nameTitle', 'Registar nueva')
+        @slot('nameTitle', 'Registar nueva cita')
 
         @slot('cardBody')
-            @include('doctors.partials.error-form')
+            @include('admin.doctors.partials.error-form')
             @include('appointments.partials.form')
         @endslot
     @endcomponent

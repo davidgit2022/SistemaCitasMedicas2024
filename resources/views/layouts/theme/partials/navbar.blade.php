@@ -9,7 +9,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Search" type="text">
+                    <input class="form-control" placeholder="Buscar" type="text">
                 </div>
             </div>
         </form>
@@ -20,10 +20,17 @@
                     aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
-                            <img alt="Image placeholder" src="{{ asset('img/theme/team-4-800x800.jpg') }}">
+                            
+                            @if (auth()->user()->photo == null)
+                                <img src="{{ asset('img/perfil_default.png') }}" alt="" class="img-fluid">
+                            @else
+                                <img src="{{ asset(auth()->user()->photo) }}" alt="" class="img-fluid">
+                            @endif
+
+
                         </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name}}</span>
+                            <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->FormatName }}</span>
                         </div>
                     </div>
                 </a>

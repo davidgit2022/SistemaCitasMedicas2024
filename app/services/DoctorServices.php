@@ -16,7 +16,12 @@ class DoctorServices {
         $filterValue = $request->input('filterValue');
 
         if (!empty($filterValue) ) {
-            $doctors = User::role('doctor')->where('name', 'LIKE', '%' . $filterValue .'%')->latest()->paginate($this->pagination);
+            $doctors = User::role('doctor')
+            ->where('name', 'LIKE', '%' . $filterValue .'%')
+            ->orWhere('last_name', 'LIKE', '%' . $filterValue . '%')
+            ->orWhere('email', 'LIKE', '%' . $filterValue . '%')
+            ->orWhere('dni', 'LIKE', '%' . $filterValue . '%')
+            ->latest()->paginate($this->pagination);
         }else{
             $doctors = User::doctors()->latest()->paginate($this->pagination);
         }

@@ -1,4 +1,4 @@
-<section>
+{{-- <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Profile Information') }}
@@ -28,7 +28,7 @@
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
                         {{ __('Your email address is unverified.') }}
@@ -62,3 +62,52 @@
         </div>
     </form>
 </section>
+ --}}
+
+<h6 class="heading-small text-muted mb-4">Información de perfil</h6>
+<form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    @csrf
+</form>
+<form method="post" action="{{ route('profile.update') }}">
+    @csrf
+    @method('patch')
+    <div class="pl-lg-4">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="username">Nombre de usuario</label>
+                    <input type="text" class="form-control 
+                         id="username" name="username"
+                        form-control-alternative" value="{{ old('name',$user->FormatName) }}" required autofocus
+                        autocomplete="username">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="email">Correo electrónico</label>
+                    <input type="email" id="email" class="form-control form-control-alternative"
+                        value="{{ old('email', $user->email) }}" placeholder="Correo electrónico" required autocomplete="name">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">Nombre</label>
+                    <input type="text" id="input-first-name" class="form-control form-control-alternative"
+                        placeholder="Primer nombre" value="{{ old('name',$user->FormatName) }}"">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Apellido</label>
+                    <input type="text" id="input-last-name" class="form-control form-control-alternative"
+                        placeholder="Apellido" value="{{ old('lastName', $user->FormatLastName) }}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<hr class="my-4" />

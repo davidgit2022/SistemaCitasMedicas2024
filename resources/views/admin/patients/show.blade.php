@@ -19,6 +19,8 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Correo electrónico</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Celular</th>
                     <th scope="col">Celular</th>
                     <th scope="col">Foto</th>
                 </tr>
@@ -36,6 +38,12 @@
                     </td>
                     <td>
                         {{ $patient->email }}
+                    </td>
+                    <td>
+                        {{ $patient->dni }}
+                    </td>
+                    <td>
+                        {{ $patient->address }}
                     </td>
                     <td>
                         {{ $patient->mobile }}

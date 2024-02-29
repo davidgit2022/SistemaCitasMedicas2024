@@ -1,4 +1,4 @@
-<section class="space-y-6">
+{{-- <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Delete Account') }}
@@ -53,3 +53,11 @@
         </form>
     </x-modal>
 </section>
+ --}}
+<h6 class="heading-small text-muted mb-4">Eliminar cuenta</h6>
+<div class="pl-lg-4">
+    <div class="form-group">
+        <label>About Me</label>
+        <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+    </div>
+</div>

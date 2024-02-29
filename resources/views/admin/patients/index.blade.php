@@ -16,7 +16,7 @@
             {{ route('patients.index') }}
         @endslot
 
-        @slot('placeholder', 'Buscar por nombre de paciente')
+        @slot('placeholder', 'Buscar paciente')
 
 
         @slot('table')
