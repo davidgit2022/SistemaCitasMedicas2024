@@ -9,6 +9,14 @@
                     <div class="col text-right">
                         <a href="{{ $routeCreate }}" class="btn btn-sm btn btn-default">{{ $nameBtnNew }}</a>
                     </div>
+                    <div class="dropdown">
+                        <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i
+                                class="fas fa-upload"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ $routeExportExcel }}">EXCEL</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group mt-3 row">
                     <div class="col-md-6 ml-auto">

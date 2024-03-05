@@ -12,6 +12,14 @@
 
         @slot('nameBtnNew', 'Nuevo doctor')
 
+        @slot('routeExportPdf',''){{-- 
+            {{ route('doctors.export-pdf') }}
+        @endslot --}}
+
+        @slot('routeExportExcel')
+            {{ route('doctors.export-excel') }}
+        @endslot
+
         @slot('routeIndex')
             {{ route('doctors.index') }}
         @endslot

@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Specialty\StoreImportSpecialtyRequest;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
 use App\Http\Requests\Specialty\StoreSpecialtyRequest;
 use App\Http\Requests\Specialty\UpdateSpecialtyRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SpecialtyImport;
 
 class SpecialtyServices{
     private $pagination = 5;
@@ -46,5 +49,12 @@ class SpecialtyServices{
         ]);
 
         return $specialty;
+    }
+
+    public function importFile(StoreImportSpecialtyRequest $request){
+        $file = $request->excel_file;
+
+        return Excel::import(new SpecialtyImport, $file);
+        
     }
 }

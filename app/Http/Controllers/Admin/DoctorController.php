@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Doctor\StoreDoctorRequest;
-use App\Http\Requests\Doctor\UpdateDoctorRequest;
-use App\Models\Specialty;
+use App\Exports\DoctorsExport;
 use App\Models\User;
-use App\Services\DoctorServices;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Services\DoctorServices;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Doctor\StoreDoctorRequest;
+use App\Http\Requests\Doctor\UpdateDoctorRequest;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DoctorController extends Controller
 {
@@ -93,4 +94,11 @@ class DoctorController extends Controller
         $notification = 'El doctor se ha eliminado correctamente.';
         return redirect()->route('doctors.index')->with(compact('notification'));
     }
+
+    public function exportListDoctor() 
+    {
+        $fileName = 'List doctor:' . date('Y-m-d H:i:s') . '.xlsx';
+        return Excel::download(new DoctorsExport, $fileName);
+    }
+
 }

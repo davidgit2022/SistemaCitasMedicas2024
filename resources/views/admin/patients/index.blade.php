@@ -10,6 +10,14 @@
             {{ route('patients.create') }}
         @endslot
 
+        @slot('routeExportPdf',''){{-- 
+            {{ route('doctors.export-pdf') }}
+        @endslot --}}
+
+        @slot('routeExportExcel')
+            {{ route('patients.export-excel') }}
+        @endslot
+
         @slot('nameBtnNew', 'Nuevo paciente')
 
         @slot('routeIndex')

@@ -30,13 +30,28 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
 
     /* Specialties */
+
     Route::resource('/specialties', SpecialtyController::class);
+
+    Route::controller(SpecialtyController::class)->group(function () {
+
+        Route::get('/specialties-import', 'formImport')->name('specialties.import');
+    
+        Route::post('/specialties-import', 'import')->name('specialties.import');
+    
+        Route::get('specialties-export/', 'export')->name('specialties.export-excel');
+
+    });
+
 
     /* Doctors */
     Route::resource('/doctors', DoctorController::class);
+    Route::get('doctors-export/', [DoctorController::class, 'exportListDoctor'])->name('doctors.export-excel');
+    
 
     /* Patients */
     Route::resource('/patients', PatientController::class);
+    Route::get('patients-export/', [PatientController::class, 'exportListPatients'])->name('patients.export-excel');
 
     /* Reports */
     

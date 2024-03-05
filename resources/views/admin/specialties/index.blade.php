@@ -12,8 +12,13 @@
 
         @slot('nameBtnNew', 'Nueva especialidad')
 
+        @slot('routeExportExcel')
+            {{ route('specialties.export-excel') }}
+        @endslot
+
         @slot('routeIndex')
             {{ route('specialties.index') }}
+
         @endslot
 
         @slot('placeholder', 'Buscar por nombre de especialidad')
@@ -34,7 +39,8 @@
                         <td>
                             @component('components.buttons-actions')
                                 @slot('btnShow')
-                                    <a href="{{ route('specialties.show', $specialty) }}" class="btn btn-success btn-sm" title="ver"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('specialties.show', $specialty) }}" class="btn btn-success btn-sm" title="ver"><i
+                                            class="fas fa-eye"></i></a>
                                 @endslot
 
                                 @slot('routeEdit')
@@ -49,6 +55,7 @@
                                     <button type="submit"class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
                                 @endslot
                             @endcomponent
+
                         </td>
                     </tr>
                 @empty
@@ -67,6 +74,5 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
         @include('admin.partials.sweetAlert2')
-
     @endpush
 @endsection

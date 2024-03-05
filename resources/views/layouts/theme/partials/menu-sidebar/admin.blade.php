@@ -23,3 +23,8 @@
         <i class="fas fa-clock text-info"></i>&nbsp;Citas médicas
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link " href="{{ route('specialties.import')}}">
+        <i class="far fa-file-alt"></i>&nbsp;Importar Documentos
+    </a>
+</li>

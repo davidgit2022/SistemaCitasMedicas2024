@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PatientsExport;
+use App\Models\User;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Services\PatientServices;
+use App\Exports\SpecialtiesExport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Patient\StorePatientRequest;
 use App\Http\Requests\Patient\UpdatePatientRequest;
-use App\Models\User;
-use App\Services\PatientServices;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class PatientController extends Controller
 {
@@ -70,5 +73,11 @@ class PatientController extends Controller
         $notification = 'El paciente se ha eliminado correctamente.';
         return redirect()->route('patients.index')->with(compact('notification'));
 
+    }
+
+    public function exportListPatients() 
+    {
+        $fileName = 'List patients:' . date('Y-m-d H-i-s') . '.xlsx';
+        return Excel::download(new PatientsExport, $fileName);
     }
 }

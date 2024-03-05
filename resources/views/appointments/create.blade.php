@@ -13,6 +13,7 @@
     @endcomponent
     @push('scripts')
         <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('/js/appointments/create.js') }}"></script>
     @endpush
 
 @endsection
