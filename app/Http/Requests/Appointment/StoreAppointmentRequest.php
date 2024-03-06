@@ -20,6 +20,7 @@ class StoreAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'scheduled_date' => 'required',
             'scheduled_time' => 'required',
             'type' => 'required',
             'description' => 'required',
@@ -31,11 +32,12 @@ class StoreAppointmentRequest extends FormRequest
     public function attributes()
     {
         return [
-            'scheduled_time.required' => 'Debe seleccionar una hora para su cita.',
-            'type.required' => 'Debe seleccionar el tipo de consulta.',
-            'description.required' => 'Debe poner sus síntomas.',
-            'doctor_id.exists' => 'exists:users,id',
-            'specialty_id.exists' => 'exists:specialties,id',
+            'scheduled_date' => 'fecha',
+            'scheduled_time' => 'hora de atención',
+            'type' => 'tipo.',
+            'description' => 'descripción',
+            'doctor_id' => 'médico',
+            'specialty_id' => 'especialidad',
         ];
     }
 

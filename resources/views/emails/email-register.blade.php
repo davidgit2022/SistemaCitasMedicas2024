@@ -53,11 +53,11 @@
     <div class="container">
         <div class="message-container">
             <h1>Registro Exitoso</h1>
-            <p>¡Bienvenido al sistema de citas médicas! Tu registro ha sido completado con éxito.</p>
+            <p><strong> {{ $user->FormatName}} {{ $user->FormatLastName}}</strong>¡Bienvenido al sistema de citas médicas! Tu registro ha sido completado con éxito.</p>
             <p>A continuación, te proporcionamos algunos datos importantes:</p>
             <ul>
-                <li><strong>Nombre:</strong>{{ $user->name}}</li>
                 <li><strong>Correo Electrónico:</strong> {{ $user->email}}</li>
+                <li><strong>Contraseña:</strong> {{ $user->password}}</li>
                 <li><strong>Número de Identificación:</strong> {{ $user->dni}}</li>
             </ul>
         </div>
