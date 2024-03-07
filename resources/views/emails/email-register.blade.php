@@ -23,14 +23,23 @@
             padding: 20px;
             max-width: 400px;
             width: 100%;
+            text-align: center;
         }
 
         .message-container {
-            text-align: center;
+            text-align: left;
+            margin-top: 20px;
         }
 
         h1 {
             color: #4caf50;
+            margin-bottom: 10px;
+        }
+
+        .saludo {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
         }
 
         ul {
@@ -52,8 +61,11 @@
 <body>
     <div class="container">
         <div class="message-container">
+            <div class="saludo">
+                <p>Hola {{ $user->FormatName}} {{ $user->FormatLastName}},</p>
+            </div>
             <h1>Registro Exitoso</h1>
-            <p><strong> {{ $user->FormatName}} {{ $user->FormatLastName}}</strong>¡Bienvenido al sistema de citas médicas! Tu registro ha sido completado con éxito.</p>
+            <p>Bienvenido al sistema de citas médicas. Tu registro ha sido completado con éxito.</p>
             <p>A continuación, te proporcionamos algunos datos importantes:</p>
             <ul>
                 <li><strong>Correo Electrónico:</strong> {{ $user->email}}</li>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\AppointmentServices;
 use Illuminate\Http\RedirectResponse;
+use App\Events\CancelAppointmentEvent;
 use App\Interfaces\ScheduleServiceInterface;
 use App\Services\Utils\Appointments\AppointmentValidator;
 use App\Http\Requests\Appointment\StoreAppointmentRequest;
@@ -48,7 +49,7 @@ class AppointmentController extends Controller
 
         $validator = validator(
             $request->all(),
-            $request->rules(), // Ajusta esto según tus reglas de validación
+            $request->rules(),
             $request->messages()
         );
 
@@ -69,7 +70,10 @@ class AppointmentController extends Controller
 
     public function cancel(Appointment $appointment, Request $request):RedirectResponse
     {
-        $this->appointmentServices->cancelledAppointment($appointment, $request);
+
+        $cancelAppointment = $this->appointmentServices->cancelledAppointment($appointment, $request);
+
+        CancelAppointmentEvent::dispatch($cancelAppointment);
 
         $notification = 'La cita se ha cancelado correctamente.';
 
@@ -89,7 +93,7 @@ class AppointmentController extends Controller
     {
         if ($appointment->status == 'confirmed') {
             $user = Auth::user();
-            $role = $user['name'];
+            $role = $user->getRoleNames()->first();
 
             return view('appointments.cancel', compact('appointment', 'role'));
         }

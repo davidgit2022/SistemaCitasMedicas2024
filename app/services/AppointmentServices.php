@@ -14,8 +14,8 @@ class AppointmentServices{
     public function getListAppointments()
     {
         $user = Auth::user();
+        $role = $user->getRoleNames()->first();
 
-        $role = $user['name'];
 
         if ($role == 'admin') {
             //Admin
@@ -34,7 +34,6 @@ class AppointmentServices{
             $oldAppointments = Appointment::completedDoctor()->get();
                 
         } elseif ($role == 'patient') {
-            
             //Patients
             $confirmedAppointments = Appointment::confirmedPatient()->get();
                 

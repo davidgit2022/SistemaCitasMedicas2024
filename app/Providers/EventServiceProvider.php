@@ -2,14 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Models\Appointment;
+use App\Observers\UserObserver;
+use Illuminate\Support\Facades\Event;
+use App\Events\CancelAppointmentEvent;
+use App\Observers\AppointmentObserver;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\SendEmailCancellationListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
-use App\Models\User;
-use App\Observers\AppointmentObserver;
-use App\Observers\UserObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        CancelAppointmentEvent::class => [
+            SendEmailCancellationListener::class,
         ],
     ];
 

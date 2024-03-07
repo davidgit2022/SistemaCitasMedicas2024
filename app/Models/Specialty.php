@@ -34,4 +34,8 @@ class Specialty extends Model
     public function doctors() : BelongsToMany {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function appointments() : BelongsToMany{
+        return $this->belongsToMany(Appointment::class);
+    }
 }

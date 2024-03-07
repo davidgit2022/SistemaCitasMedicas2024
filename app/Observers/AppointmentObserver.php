@@ -2,14 +2,20 @@
 
 namespace App\Observers;
 
+use App\Mail\AppointmentCreated;
 use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentObserver
 {
 
     public function created(Appointment $appointment): void
     {
-        dd($appointment);
+
+        $email = Auth::user()->email;
+        
+        Mail::to($email)->send(new AppointmentCreated($appointment));
     }
 
     /**
@@ -25,12 +31,9 @@ class AppointmentObserver
      */
     public function deleted(Appointment $appointment): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Appointment "restored" event.
-     */
     public function restored(Appointment $appointment): void
     {
         //

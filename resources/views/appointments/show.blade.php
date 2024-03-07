@@ -25,7 +25,7 @@
                 <strong>Fecha:</strong>&nbsp; {{ $appointment->scheduled_date }}
             </dd>
             <dd>
-                <strong>Hora de atención:</strong>&nbsp; {{ $appointment->scheduled_time }}
+                <strong>Hora de atención:</strong>&nbsp; {{ $appointment->FormatScheduledTime }}
             </dd>
             @if ($role == 'patient' || $role == 'admin')
                 <dd>

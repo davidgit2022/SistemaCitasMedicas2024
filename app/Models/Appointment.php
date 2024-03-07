@@ -48,7 +48,14 @@ class Appointment extends Model
 
     public function getScheduledTime12Attribute()
     {
-        return (new Carbon($this->scheduled_time))->format('g:i A');
+        return (new Carbon($this->scheduled_time))->format('g
+        :i A');
+    }
+
+    public function getFormatScheduledTimeAttribute()
+    {
+        $scheduledTime = $this->attributes['scheduled_time'];
+        return $scheduledTime < '12:00:00' ? $scheduledTime . ' A.M' : $scheduledTime . ' P.M';
     }
 
     public function getFormatStatusAttribute()

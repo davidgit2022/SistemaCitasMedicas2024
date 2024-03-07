@@ -2,18 +2,19 @@
 @section('title', 'Formulario cancelación')
 @section('content')
     @component('components.appointment-component')
-        @slot('nameTitle', 'Cancelar')
+        @slot('nameTitle', 'Cancelar Cita')
 
         @slot('cardBody')
             @include('components.notification')
             @if ($role == 'patient')
                 <p>Se cancelará tú cita reservada con él médico <b>{{ $appointment->doctor->FormatName }}</b> (especialidad
-                    <b>{{ $appointment->specialty->FormatName }}</b>) para el día <b>{{ $appointment->scheduled_date }}</b>
+                    <b>{{ $appointment->specialty->FormatName }}</b>) para el día <b>{{ $appointment->scheduled_date }}</b>, la
+                    hora <b>{{ $appointment->FormatScheduledTime }}</b>
                 </p>
             @elseif ($role == 'doctor')
                 <p>Se cancelará la cita médica del paciente <b>{{ $appointment->patient->FormatName }}</b> (especialidad
                     <b>{{ $appointment->specialty->FormatName }}</b>) para el día <b>{{ $appointment->scheduled_date }}</b>, la
-                    hora <b>{{ $appointment->scheduled_time }}</b>
+                    hora <b>{{ $appointment->FormatScheduledTime }}</b>
                 </p>
             @else
                 <p>Se cancelará la cita médica del paciente <b>{{ $appointment->patient->FormatName }}:</b> <br><br>
@@ -21,7 +22,7 @@
                     (especialidad
                     <b>{{ $appointment->specialty->FormatName }}</b>)<br><br>
                     Para el día <b>{{ $appointment->scheduled_date }}</b>, la
-                    hora <b>{{ $appointment->scheduled_time < 12 ? $appointment->scheduled_time . ' A.M' : $appointment->scheduled_time . ' P.M' }}
+                    hora <b>{{ $appointment->FormatScheduledTime}}
                     </b>
                 </p>
             @endif
