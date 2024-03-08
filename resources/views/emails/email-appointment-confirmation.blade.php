@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cancelación de Cita</title>
+    <title>Confirmación de Cita</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -32,7 +32,7 @@
         }
 
         h1 {
-            color: #e74c3c;
+            color: #2ecc71;
             margin-bottom: 10px;
         }
 
@@ -46,8 +46,17 @@
             margin-bottom: 10px;
         }
 
-        .motivo {
-            color: #e74c3c;
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .recomendacion {
+            color: #3498db;
             font-weight: bold;
         }
 
@@ -66,24 +75,16 @@
             <div class="saludo">
                 <p>Hola {{ $appointment->patient->FormatName}}</p>
             </div>
-            <h1>Cancelación de Cita</h1>
-            @if ($rol == 'patient')
-                <p>Has cancelado tu cita médica.</p>
-            @else
-                <p>Lamentamos informarte que tu cita médica ha sido cancelada:</p>
-            @endif
-            
+            <h1>Confirmación de Cita</h1>
+            <p>Tu cita médica programada para el siguiente día está confirmada:</p>
             <ul>
                 <li><strong>Fecha Programada:</strong> {{ $appointment->scheduled_date }}</li>
-                <li><strong>Hora Programada:</strong> {{ $appointment->FormatScheduledTime}}</li>
-                <li><strong>Tipo de appointment:</strong> {{ $appointment->type }}</li>
+                <li><strong>Hora Programada:</strong> {{ $appointment->FormatScheduledTime }}</li>
+                <li><strong>Tipo de cita:</strong> {{ $appointment->type }}</li>
                 <li><strong>Médico:</strong> {{ $appointment->doctor->FormatName }} {{ $appointment->doctor->FormatLastName }}</li>
                 <li><strong>Especialidad:</strong> {{ $appointment->specialty->FormatName }}</li>
             </ul>
-            @if ($appointment->cancellation->justification)
-            <p class="motivo">Motivo de la Cancelación: </p>
-                {{ $appointment->cancellation->justification }}
-            @endif
+            <p class="recomendacion">Te recomendamos llegar 10 minutos antes con tus documentos necesarios.</p>
         </div>
 
         <div class="footer">

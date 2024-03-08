@@ -11,16 +11,17 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ConfirmAppointmentEvent
+class PdfGeneratedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
-    public function __construct(public Appointment $appointment)
+    public $appointment;
+    public $pdfPath;
+
+    public function __construct(Appointment $appointment, string $pdfPath)
     {
-        //
+        $this->appointment = $appointment;
+        $this->pdfPath = $pdfPath;
     }
 
     /**
@@ -31,7 +32,7 @@ class ConfirmAppointmentEvent
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('confirmation-appointment'),
+            new PrivateChannel('channel-name'),
         ];
     }
 }

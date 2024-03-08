@@ -12,10 +12,8 @@ class AppointmentObserver
 
     public function created(Appointment $appointment): void
     {
-
-        $email = Auth::user()->email;
         
-        Mail::to($email)->send(new AppointmentCreated($appointment));
+        Mail::to($appointment->patient->email)->send(new AppointmentCreated($appointment));
     }
 
     /**

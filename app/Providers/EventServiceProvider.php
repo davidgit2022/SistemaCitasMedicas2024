@@ -5,10 +5,14 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Appointment;
 use App\Observers\UserObserver;
+use App\Events\PdfGeneratedEvent;
 use Illuminate\Support\Facades\Event;
 use App\Events\CancelAppointmentEvent;
+use App\Listeners\GeneratePdfListener;
 use App\Observers\AppointmentObserver;
 use Illuminate\Auth\Events\Registered;
+use App\Events\ConfirmAppointmentEvent;
+use App\Listeners\SendEmailConfirmListener;
 use App\Listeners\SendEmailCancellationListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +31,15 @@ class EventServiceProvider extends ServiceProvider
         CancelAppointmentEvent::class => [
             SendEmailCancellationListener::class,
         ],
+        
+        ConfirmAppointmentEvent::class => [
+            GeneratePdfListener::class,
+        ],
+        PdfGeneratedEvent::class => [
+            SendEmailConfirmListener::class,
+        ],
+
+
     ];
 
     /**

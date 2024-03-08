@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\AppointmentServices;
 use Illuminate\Http\RedirectResponse;
 use App\Events\CancelAppointmentEvent;
+use App\Events\ConfirmAppointmentEvent;
 use App\Interfaces\ScheduleServiceInterface;
 use App\Services\Utils\Appointments\AppointmentValidator;
 use App\Http\Requests\Appointment\StoreAppointmentRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AppointmentController extends Controller
 {
@@ -82,7 +84,9 @@ class AppointmentController extends Controller
 
     public function confirm(Appointment $appointment):RedirectResponse
     {
-        $this->appointmentServices->confirmAppointment($appointment);
+        $confirmationAppointment = $this->appointmentServices->confirmAppointment($appointment);
+
+        ConfirmAppointmentEvent::dispatch($confirmationAppointment);
 
         $notification = 'La cita se ha confirmado correctamente.';
 

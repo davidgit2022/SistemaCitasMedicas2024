@@ -9,7 +9,7 @@
 
 
         @slot('cardBody')
-            <div id="container">
+            <div id="container2">
 
             </div>
         @endslot
@@ -22,7 +22,7 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
         <script>
-            Highcharts.chart('container', {
+            Highcharts.chart('container2', {
                 chart: {
                     type: 'line'
                 },
