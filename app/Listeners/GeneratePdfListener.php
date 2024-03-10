@@ -23,11 +23,9 @@ class GeneratePdfListener
         $appointment = $event->appointment;
         $pdfContent = $this->pdfGenerator->generatePdf($appointment);
 
-        // Guardar el PDF en una ubicación específica
-        $pdfPath = storage_path('app/pdfs/' . $appointment->id . '_confirmation.pdf');
+        $pdfPath = storage_path('app/pdfs/' . uniqid() . '_confirmation.pdf');
         file_put_contents($pdfPath, $pdfContent);
 
-        // Disparar otro evento para informar sobre la generación del PDF
         event(new PdfGeneratedEvent($appointment, $pdfPath));
     }
 }

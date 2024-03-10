@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Specialty;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,7 +28,7 @@ class SpecialtySeeder extends Seeder
             Specialty::create([
                 'name' => $specialtyName,
             ]);
-
         }
+
     }
 }

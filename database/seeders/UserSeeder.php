@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Specialty;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -46,15 +47,20 @@ class UserSeeder extends Seeder
         User::factory()
             ->count(50)
             ->create()
-            ->each(function ($user){
+            ->each(function ($user) {
                 $user->assignRole('patient');
             });
 
         User::factory()
             ->count(10)
             ->create()
-            ->each(function ($user){
+            ->each(function ($user) {
                 $user->assignRole('doctor');
+
+                $specialties = Specialty::inRandomOrder()->limit(3)->get();
+
+
+                $user->specialties()->attach($specialties);
             });
     }
 }

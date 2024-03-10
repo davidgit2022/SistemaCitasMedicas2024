@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -35,16 +36,38 @@ class ProfileController extends Controller
 
         $user = auth()->user();
 
-        if ($request->hasFile('photo')) {
-            File::delete(public_path('storage/' . $user->photo));
-            $photo = $request['photo']->store('profiles');
-        }else{
-            $photo = $user->photo;
+        if($request->hasFile('photo')){
+
+            $fileName = uniqid() . '_.' . $request->photo->extension();
+
+            $request->photo->move(public_path('img/profiles'), $fileName);
+
+            $photoOld = $user->photo;
+
+            $photo = 'img/profiles/' . $fileName;
+
+            $user->photo = $photo;
+
+            $request->user()->save();
+
+            if ($photoOld != null) {
+                $oldFilePath = public_path($photoOld);
+        
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
         }
 
-        $user->photo = $photo;
+        
 
-        $request->user()->save();
+        /* if ($photo != null) {
+            $oldFilePath = public_path($photo);
+    
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+        } */
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

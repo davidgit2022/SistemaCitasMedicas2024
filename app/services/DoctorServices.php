@@ -54,12 +54,6 @@ class DoctorServices {
             'mobile' => $request->mobile,
         ]);
 
-        /* if($request->photo){
-            $fileName = uniqid() . '_.' . $request->photo->extension();
-            $request->photo->move(public_path('img/profiles/doctors'), $fileName);
-            $doctor->photo = 'img/profiles/doctors/' . $fileName;
-            $doctor->save();
-        } */
 
         $doctor->roles()->sync(2);
 

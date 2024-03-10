@@ -42,8 +42,9 @@
         <div class="container-fluid d-flex align-items-center">
             <div class="row">
                 <div class="col-lg-7 col-md-10">
-                    <h1 class="display-2 text-white">Hola {{$user->FormatName}} </h1>
-                    <p class="text-white mt-0 mb-5">Esta es tu página de perfil. Puedes realizar los ajustes, que creas convenientes.</p>
+                    <h1 class="display-2 text-white">Hola {{ $user->FormatName }} </h1>
+                    <p class="text-white mt-0 mb-5">Esta es tu página de perfil. Puedes realizar los ajustes, que creas
+                        convenientes.</p>
                 </div>
             </div>
         </div>
@@ -58,30 +59,30 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    @if (auth()->user()->photo == null)
-                                    <img src="{{ asset('img/perfil_default.png') }}" alt="not-available" class="img-fluid">
-
+                                    @if ($user->photo != '')
+                                        <img src=" {{ asset($user->photo) }}" class="rounded-circle">
                                     @else
-                                    <img src=" {{ asset(auth()->user()->photo)}}" class="rounded-circle">
+                                        <img src="{{ asset('img/perfil_default.png') }}" alt="not-available"
+                                            class="img-fluid">
                                     @endif
-                                    
+
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                        
+
                     </div>
                     <div class="card-body pt-0 pt-md-4">
                         <div class="row">
                             <div class="col">
                                 <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                    
+
                                 </div>
                             </div>
                         </div>
                         <div class="text-center">
-                            <h3>{{$user->FormatName}}<span class="font-weight-light">
+                            <h3>{{ $user->FormatName }}<span class="font-weight-light">
                         </div>
                     </div>
                 </div>
@@ -108,12 +109,12 @@
 
                             <!-- ELIMINAR CUENTA -->
                             @include('profile.partials.delete-user-form')
-                
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 @endsection
