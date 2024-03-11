@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             SpecialtySeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            ScheduleSeeder::class,
+            AppointmentSeeder::class,
         ]);
 
     }

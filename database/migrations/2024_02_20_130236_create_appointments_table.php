@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->date('scheduled_date');
             $table->time('scheduled_time');
-            $table->string('type');
+            $table->enum('type', ['consultation', 'examination', 'operation']);
             $table->string('description');
             $table->enum('status', ['reserved', 'confirmed', 'completed', 'cancelled'])->default('reserved');
 

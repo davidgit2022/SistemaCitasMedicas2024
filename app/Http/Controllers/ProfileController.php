@@ -34,9 +34,12 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        
         $user = auth()->user();
+        
 
-        if($request->hasFile('photo')){
+        
+        if ($request->hasFile('photo')) {
 
             $fileName = uniqid() . '_.' . $request->photo->extension();
 
@@ -47,19 +50,23 @@ class ProfileController extends Controller
             $photo = 'img/profiles/' . $fileName;
 
             $user->photo = $photo;
-
-            $request->user()->save();
+            
+            $user->save();
 
             if ($photoOld != null) {
                 $oldFilePath = public_path($photoOld);
-        
+
                 if (file_exists($oldFilePath)) {
-                    unlink($oldFilePath);
+                      unlink($oldFilePath);
                 }
+
             }
+        } else {
+            $photo = $user->photo;
+            
         }
 
-        
+
 
         /* if ($photo != null) {
             $oldFilePath = public_path($photo);

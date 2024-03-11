@@ -22,7 +22,7 @@ class PatientServices
                 ->orWhere('dni', 'LIKE', '%' . $filterValue . '%');
             $patients = $patientsFilter->role('patient')->latest()->paginate($this->pagination);
         } else {
-            $patients = User::patient()->latest()->paginate($this->pagination);
+            $patients = User::patients()->latest()->paginate($this->pagination);
         }
 
         return [

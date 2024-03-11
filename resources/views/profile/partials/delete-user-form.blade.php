@@ -62,11 +62,15 @@
         </p>
     </header>
 
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmUserDeletionModal">
+    {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmUserDeletionModal">
+        {{ __('Eliminar Cuenta') }}
+    </button> --}}
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmUserDeletionModal">
         {{ __('Eliminar Cuenta') }}
     </button>
 
-    <div class="modal fade" id="confirmUserDeletionModal" tabindex="-1" aria-labelledby="confirmUserDeletionModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="confirmUserDeletionModal" tabindex="-1" aria-labelledby="confirmUserDeletionModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form method="post" action="{{ route('profile.destroy') }}" class="p-4">
@@ -83,7 +87,8 @@
 
                     <div class="mt-3">
                         <label for="password" class="visually-hidden">{{ __('Password') }}</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="{{ __('Password') }}" required>
+                        <input type="password" id="password" name="password" class="form-control"
+                            placeholder="{{ __('Password') }}" required>
 
                         @error('userDeletion.password')
                             <div class="text-danger mt-2">{{ $message }}</div>
@@ -102,10 +107,52 @@
                 </form>
             </div>
         </div>
+    </div> --}}
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmUserDeletionModal" tabindex="-1" role="dialog" aria-labelledby="confirmUserDeletionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro de que quieres eliminar tu cuenta?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ route('profile.destroy') }}" class="p-4">
+                        @csrf
+                        @method('delete')
+
+    
+                        <p class="mt-1 text-muted">
+                            {{ __('Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta.') }}
+                        </p>
+    
+                        <div class="mt-3">
+                            <label for="password" class="visually-hidden">{{ __('Password') }}</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="{{ __('Password') }}" required>
+    
+                            @error('userDeletion.password')
+                                <div class="text-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancelar') }}</button>
+                    <button type="submit" class="btn btn-danger">{{ __('Eliminar Cuenta') }}</button>
+                </div>
+            </form>
+            </div>
+        </div>
     </div>
 </div>
 
 <section class="py-6">
-    
-</section>
 
+</section>

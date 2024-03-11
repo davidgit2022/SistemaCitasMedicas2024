@@ -66,7 +66,7 @@
 <body>
     <div class="container">
         <h1>Cita Médica</h1>
-        <p>Estimado/a {{ Auth::user()->name}},</p>
+        <p>Estimado/a {{ $appointment->patient->FormatName}},</p>
         <p>A continuación se detallan los datos de su cita médica:</p>
 
         <table>

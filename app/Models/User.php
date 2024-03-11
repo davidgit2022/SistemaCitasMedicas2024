@@ -87,7 +87,7 @@ class User extends Authenticatable
         return $query->role('doctor');
     }
 
-    public function scopePatient($query){
+    public function scopePatients($query){
         return $query->role('patient');
     }
 
