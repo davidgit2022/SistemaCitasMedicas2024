@@ -121,7 +121,14 @@ class Appointment extends Model
     {
         $type = $this->attributes['type'];
 
-        return ucfirst($type);
+        if($type == 'consultation'){
+            $type = 'Consulta';
+        }elseif($type == 'examination'){
+            $type = 'Confirmada';
+        }elseif($type == 'operation'){
+            $type = 'Completada';
+        }
+        return $type;
     }
 
     public function getFormatDescriptionAttribute()

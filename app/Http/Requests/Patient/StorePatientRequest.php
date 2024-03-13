@@ -19,7 +19,7 @@ class StorePatientRequest extends FormRequest
             'name' => 'required|regex:/^[a-zA-ZáéíóúñÑÁÉÍÓÚ\s]+$/',
             'lastName' => 'required|regex:/^[a-zA-ZáéíóúñÑÁÉÍÓÚ\s]+$/',
             'email' => 'required|unique:users,email',
-            'dni' => 'required|numeric|regex:/^[0123456789]+$/',
+            'dni' => 'required|numeric|regex:/^[0123456789]+$/|unique:users,dni',
             'password' => 'required|string|min:8|confirmed|regex:/^[a-zA-Z0123456789]+$/',
             'address' => 'required',
             'mobile' => 'required|numeric|digits:10',

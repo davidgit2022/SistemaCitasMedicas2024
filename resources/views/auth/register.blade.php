@@ -76,6 +76,20 @@
                                         value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 </div>
                             </div>
+
+                            {{-- LastName --}}
+
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Apellido" type="text" name="lastName"
+                                        value="{{ old('last_name') }}" required autocomplete="lastName" autofocus>
+                                </div>
+                            </div>
+
+                            {{-- Email --}}
                             <div class="form-group">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
@@ -85,6 +99,18 @@
                                         name="email" value="{{ old('email') }}" required autocomplete="email">
                                 </div>
                             </div>
+                            {{-- DNI --}}
+
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Cedula" type="number"
+                                        name="dni" value="{{ old('dni') }}" required autocomplete="dni">
+                                </div>
+                            </div>
+                            {{-- Password --}}
                             <div class="form-group">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -94,6 +120,7 @@
                                         required autocomplete="new-password">
                                 </div>
                             </div>
+                            {{-- Confirmation Password --}}
                             <div class="form-group">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">

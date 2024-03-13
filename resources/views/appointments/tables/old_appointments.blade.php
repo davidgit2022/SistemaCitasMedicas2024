@@ -9,16 +9,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($oldAppointments as $cita)
+            @foreach ($oldAppointments as $appointment)
                 <tr>
                     <td>
-                        {{ $cita->specialty->name}}
+                        {{ $appointment->specialty->name}}
                     </td>
                     <td>
-                        {{ $cita->scheduled_date}}
+                        {{ $appointment->scheduled_date}}
                     </td>
                     <td>
-                        <a href="{{ route('appointments.show', ['appointment' => $cita->id] ) }}" class="btn btn-info btn-sm">
+                        <a href="{{ route('appointments.show', ['appointment' => $appointment->id] ) }}" class="btn btn-info btn-sm">
                             Ver
                         </a>
                     </td>
@@ -26,4 +26,8 @@
             @endforeach
         </tbody>
     </table>
+    
+    <div class="card-body">
+        {{ $oldAppointments->links('pagination::bootstrap-4') }}
+    </div>
 </div>

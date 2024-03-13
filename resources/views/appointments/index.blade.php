@@ -50,10 +50,5 @@
                 </div>
             </div>
         </div>
-
-
-        {{-- <div class="card-body">
-            {{ $appointments->links()}}
-        </div> --}}
     </div>
 @endsection

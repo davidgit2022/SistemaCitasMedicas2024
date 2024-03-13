@@ -2,7 +2,6 @@
     <table class="table align-items-center table-flush">
         <thead class="thead-light">
             <tr>
-                <th scope="col">Descripción</th>
                 <th scope="col">Especialidad</th>
                 @if ($role == 'patient')
                     <th scope="col">Médico</th>
@@ -18,9 +17,6 @@
         <tbody>
             @foreach ($pendingAppointments as $appointment)
                 <tr>
-                    <th scope="row">
-                        {{ $appointment->FormatDescription}}
-                    </th>
                     <td>
                         {{ $appointment->specialty->FormatName}}
                     </td>
@@ -63,5 +59,8 @@
             @endforeach
         </tbody>
     </table>
+    <div class="card-body">
+        {{ $pendingAppointments->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 

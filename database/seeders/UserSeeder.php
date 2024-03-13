@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'last_name' => 'principal',
             'email' => 'admin@gmail.com',
             'password' => password_hash('12345678', PASSWORD_DEFAULT),
-            'dni' => '1085300505',
+            'dni' => '1985300505',
             'address' => 'street false',
             'mobile' => '3122359623'
         ])->assignRole('admin');
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'last_name' => 'principal',
             'email' => 'doctor@gmail.com',
             'password' => password_hash('12345678', PASSWORD_DEFAULT),
-            'dni' => '1085300505',
+            'dni' => '1085340505',
             'address' => 'street false',
             'mobile' => '3122359623'
         ])->assignRole('doctor');

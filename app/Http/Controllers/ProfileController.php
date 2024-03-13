@@ -36,45 +36,29 @@ class ProfileController extends Controller
 
         
         $user = auth()->user();
-        
 
-        
+               
         if ($request->hasFile('photo')) {
 
             $fileName = uniqid() . '_.' . $request->photo->extension();
-
-            $request->photo->move(public_path('img/profiles'), $fileName);
-
+            $request->photo->storeAs('public/img/profiles', $fileName);
             $photoOld = $user->photo;
-
-            $photo = 'img/profiles/' . $fileName;
-
-            $user->photo = $photo;
+             
+            $photo =  'storage/img/profiles/' . $fileName;
             
-            $user->save();
-
             if ($photoOld != null) {
-                $oldFilePath = public_path($photoOld);
-
-                if (file_exists($oldFilePath)) {
-                      unlink($oldFilePath);
+        
+                if (file_exists('storage/img/profiles/' . $photoOld)) {
+                    unlink('storage/img/profiles/' . $photoOld);
                 }
-
             }
         } else {
             $photo = $user->photo;
-            
         }
+        $user->photo = $photo;
 
+        $user->save();
 
-
-        /* if ($photo != null) {
-            $oldFilePath = public_path($photo);
-    
-            if (file_exists($oldFilePath)) {
-                unlink($oldFilePath);
-            }
-        } */
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

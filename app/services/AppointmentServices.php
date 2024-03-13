@@ -11,35 +11,36 @@ use App\Interfaces\ScheduleServiceInterface;
 use App\Http\Requests\Appointment\StoreAppointmentRequest;
 
 class AppointmentServices{
+    private $pagination = 20;
     public function getListAppointments()
     {
         $user = Auth::user();
         $role = $user->getRoleNames()->first();
-
+        
 
         if ($role == 'admin') {
             //Admin
-            $confirmedAppointments = Appointment::confirmedAdmin()->get();
+            $confirmedAppointments = Appointment::confirmedAdmin()->latest()->paginate($this->pagination);
 
-            $pendingAppointments = Appointment::reservedAdmin()->get();
+            $pendingAppointments = Appointment::reservedAdmin()->latest()->paginate($this->pagination);
 
-            $oldAppointments = Appointment::completedAdmin()->get();
+            $oldAppointments = Appointment::completedAdmin()->latest()->paginate($this->pagination);
             
         } elseif ($role == 'doctor') {
             //Doctor
-            $confirmedAppointments = Appointment::confirmedDoctor()->get();
+            $confirmedAppointments = Appointment::confirmedDoctor()->latest()->paginate($this->pagination);
                 
-            $pendingAppointments = Appointment::reservedDoctor()->get();
+            $pendingAppointments = Appointment::reservedDoctor()->latest()->paginate($this->pagination);
                 
-            $oldAppointments = Appointment::completedDoctor()->get();
+            $oldAppointments = Appointment::completedDoctor()->latest()->paginate($this->pagination);
                 
         } elseif ($role == 'patient') {
             //Patients
-            $confirmedAppointments = Appointment::confirmedPatient()->get();
+            $confirmedAppointments = Appointment::confirmedPatient()->latest()->paginate($this->pagination);
                 
-            $pendingAppointments = Appointment::reservedPatient()->get();
+            $pendingAppointments = Appointment::reservedPatient()->latest()->paginate($this->pagination);
 
-            $oldAppointments = Appointment::completedPatient()->get();
+            $oldAppointments = Appointment::completedPatient()->latest()->paginate($this->pagination);
         }
 
         return [

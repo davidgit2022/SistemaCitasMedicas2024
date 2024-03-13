@@ -21,7 +21,7 @@ class UpdateDoctorRequest extends FormRequest
             'email' => 'required|unique:users,email,' . $doctorId,
             'specialties' => 'required',
             //'password' => 'required',
-            'dni' => 'required|numeric|regex:/^[0123456789]+$/',
+            'dni' => 'required|numeric|regex:/^[0123456789]+$/unique:users,dni,' . $doctorId,
             'address' => 'required',
             'mobile' => 'required|numeric|digits:10',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'

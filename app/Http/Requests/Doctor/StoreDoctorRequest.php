@@ -22,7 +22,7 @@ class StoreDoctorRequest extends FormRequest
             'email' => 'required|unique:users,email',
             'specialties' => 'required',
             'password' => 'required|string|min:8|confirmed|regex:/^[a-zA-Z0123456789]+$/',
-            'dni' => 'required|numeric|regex:/^[0123456789]+$/',
+            'dni' => 'required|numeric|regex:/^[0123456789]+$/|unique:users,dni',
             'address' => 'required',
             'mobile' => 'required|numeric|digits:10',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'

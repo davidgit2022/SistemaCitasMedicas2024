@@ -81,7 +81,7 @@ class User extends Authenticatable
         $this->attributes['email'] = strtolower($value);
     }
 
-    /* Scope */
+    /*----------------------------- Scope -----------------------------*/
 
     public function scopeDoctors($query){
         return $query->role('doctor');

@@ -120,22 +120,20 @@
 
             <input type="file" name="photo" id="photo" class="form-control-file" accept="image/*">
 
-            @if ($user->photo)
-                <div class="d-flex flex-column">
-                    <label for="photo" class="form-label text-center">{{ __('Foto Actual') }}</label>
-                    <div class="text-center">
-                        @if ($user->photo != '')
-                            <img src="{{ asset($user->photo) }}" class="img-fluid" alt="Foto Actual" width="300px"
-                                height="60px">
-                        @else
-                            <img src="{{ asset('img/perfil_default.png') }}" class="img-fluid" alt="Foto Actual"
-                                width="300px" height="60px">
-                        @endif
 
-
-                    </div>
+            <div class="d-flex flex-column">
+                <label for="photo" class="form-label text-center">{{ __('Foto Actual') }}</label>
+                <div class="text-center">
+                    @if (!empty($user->photo))
+                        <img src="{{ asset($user->photo) }}" class="img-fluid text-center" alt="photo-profile" width="300px"
+                            height="60px">
+                    @else
+                        <img src="{{ asset('img/perfil_default.png') }}" class="img-fluid" alt="not-available"
+                            width="300px" height="60px">
+                    @endif
                 </div>
-            @endif
+            </div>
+
             @error('photo')
                 <span class="text-danger">
                     <span>{{ $message }}</span>

@@ -22,9 +22,9 @@
                         <span class="avatar avatar-sm rounded-circle">
                             
                             @if (auth()->user()->photo == null)
-                                <img src="{{ asset('img/perfil_default.png') }}" alt="" class="img-fluid">
+                                <img src="{{ asset('img/perfil_default.png') }}" alt="not-available" class="img-fluid">
                             @else
-                                <img src="{{ asset(auth()->user()->photo) }}" alt="" class="img-fluid">
+                                <img src="{{ asset(auth()->user()->photo) }}" alt="photo-profile" class="img-fluid">
                             @endif
 
 

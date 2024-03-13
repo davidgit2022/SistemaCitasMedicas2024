@@ -1,9 +1,7 @@
 <div class="table-responsive">
-
     <table class="table align-items-center table-flush">
         <thead class="thead-light">
             <tr>
-                <th scope="col">Descripción</th>
                 <th scope="col">Especialidad</th>
                 @if ($role == 'paciente')
                     <th scope="col">Médico</th>
@@ -18,46 +16,46 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($confirmedAppointments as $cita)
+            @foreach ($confirmedAppointments as $appointment)
                 <tr>
-                    <th scope="row">
-                        {{ $cita->description }}
-                    </th>
                     <td>
-                        {{ $cita->specialty->FormatName }}
+                        {{ $appointment->specialty->FormatName }}
                     </td>
                     @if ($role == 'paciente')
                         <td>
-                            {{ $cita->doctor->name }}
+                            {{ $appointment->doctor->name }}
                         </td>
                     @elseif ($role == 'doctor')
                         <td>
-                            {{ $cita->patient->name }}
+                            {{ $appointment->patient->name }}
                         </td>
                     @endif
 
                     <td>
-                        {{ $cita->scheduled_date }}
+                        {{ $appointment->scheduled_date }}
                     </td>
                     <td>
-                        {{ $cita->ScheduledTime12 }}
+                        {{ $appointment->ScheduledTime12 }}
                     </td>
                     <td>
-                        {{ $cita->type }}
+                        {{ $appointment->FormatType }}
                     </td>
                     <td>
-                        {!! $cita->FormatStatus !!}
+                        {!! $appointment->FormatStatus !!}
                     </td>
                     <td>
                         @if ($role == 'admin')
-                            <a href="{{ route('appointments.show',['appointment' => $cita->id]) }}" class="btn btn-sm btn-info"
-                                title="Ver cita">Ver</a>
+                            <a href="{{ route('appointments.show', ['appointment' => $appointment->id]) }}"
+                                class="btn btn-sm btn-info" title="Ver cita">Ver</a>
                         @endif
-                        <a href="{{ route('appointments.form-cancel',['appointment' => $cita->id] ) }}" class="btn btn-sm btn-danger"
-                            title="Cancelar cita">Cancelar</a>
+                        <a href="{{ route('appointments.form-cancel', ['appointment' => $appointment->id]) }}"
+                            class="btn btn-sm btn-danger" title="Cancelar cita">Cancelar</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="card-body">
+        {{ $confirmedAppointments->links('pagination::bootstrap-4') }}
+    </div>
 </div>
