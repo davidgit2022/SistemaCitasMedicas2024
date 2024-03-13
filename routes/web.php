@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/my-appointments/{appointment}/confirm','confirm')->name('appointments.confirm');
 
         Route::get('/my-appointments/{appointment}/cancel','formCancel')->name('appointments.form-cancel');
+
     });
 
     //JSON

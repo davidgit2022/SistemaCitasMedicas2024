@@ -80,10 +80,6 @@
                 <li><strong>Médico:</strong> {{ $appointment->doctor->FormatName }} {{ $appointment->doctor->FormatLastName }}</li>
                 <li><strong>Especialidad:</strong> {{ $appointment->specialty->FormatName }}</li>
             </ul>
-            @if ($appointment->cancellation->justification)
-            <p class="motivo">Motivo de la Cancelación: </p>
-                {{ $appointment->cancellation->justification }}
-            @endif
         </div>
 
         <div class="footer">

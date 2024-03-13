@@ -6,10 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'scheduled_date',
@@ -124,9 +125,9 @@ class Appointment extends Model
         if($type == 'consultation'){
             $type = 'Consulta';
         }elseif($type == 'examination'){
-            $type = 'Confirmada';
+            $type = 'Examen';
         }elseif($type == 'operation'){
-            $type = 'Completada';
+            $type = 'Operación';
         }
         return $type;
     }
