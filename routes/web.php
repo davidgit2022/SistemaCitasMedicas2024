@@ -33,7 +33,7 @@ Route::get('/google-auth/callback', function () {
     ],[
         'name' => $user_google->name,
         'email' => $user_google->email,
-    ]);
+    ])->assignRole('patient');
 
     Auth::login($user);
 
