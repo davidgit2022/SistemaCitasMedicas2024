@@ -21,15 +21,15 @@
             <div class="nav-wrapper">
                 <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" data-toggle="tab" href="#mis-citas" role="tab"
+                        <a class="nav-link mb-sm-3 mb-md-0 active" data-link="confirmed_appointments" data-toggle="tab" href="#mis-citas" role="tab"
                             aria-selected="true"><i class="ni ni-calendar-grid-58 mr-2"></i>Mis citas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0" data-toggle="tab" href="#citas-pendientes" role="tab"
+                        <a class="nav-link mb-sm-3 mb-md-0" data-link="pending_appointments" data-toggle="tab" href="#citas-pendientes" role="tab"
                             aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>Citas pendientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0" data-toggle="tab" href="#historial" role="tab"
+                        <a class="nav-link mb-sm-3 mb-md-0" data-link="old_appointments" data-toggle="tab" href="#historial" role="tab"
                             aria-selected="false"><i class="ni ni-folder-17 mr-2"></i>Historial</a>
                     </li>
                 </ul>
@@ -51,4 +51,31 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            let tab;
+            let mS = window.localStorage
+            mS.setItem('tabActive', ' ')
+            
+            let elements = document.querySelectorAll(".nav-link");
+            elements.forEach(element => {
+
+                element.addEventListener('click', () => {
+                    tab = element.getAttribute("data-link");
+                    mS.setItem('tabActive', tab)
+
+                    console.log(mS.tabActive);
+                    
+                });
+
+                if (mS.tabActive === tab) {
+                    element.classList.add('active')
+                }else {
+                    element.classList.remove('active')
+                }
+            });
+
+        </script>
+    @endpush
 @endsection

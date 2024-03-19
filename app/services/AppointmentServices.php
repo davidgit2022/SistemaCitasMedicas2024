@@ -16,33 +16,34 @@ class AppointmentServices{
     {
         $user = Auth::user();
         $role = $user->getRoleNames()->first();
+    
+        $pagination = 20;
         
-
         if ($role == 'admin') {
             //Admin
-            $confirmedAppointments = Appointment::confirmedAdmin()->latest()->paginate($this->pagination);
-
-            $pendingAppointments = Appointment::reservedAdmin()->latest()->paginate($this->pagination);
-
-            $oldAppointments = Appointment::completedAdmin()->latest()->paginate($this->pagination);
+            $confirmedAppointments = Appointment::confirmedAdmin()->latest()->paginate($pagination, ['*'], 'confirmed_page');
+    
+            $pendingAppointments = Appointment::reservedAdmin()->latest()->paginate($pagination, ['*'], 'pending_page');
+    
+            $oldAppointments = Appointment::completedAdmin()->latest()->paginate($pagination, ['*'], 'old_page');
             
         } elseif ($role == 'doctor') {
             //Doctor
-            $confirmedAppointments = Appointment::confirmedDoctor()->latest()->paginate($this->pagination);
+            $confirmedAppointments = Appointment::confirmedDoctor()->latest()->paginate($pagination, ['*'], 'confirmed_page');
                 
-            $pendingAppointments = Appointment::reservedDoctor()->latest()->paginate($this->pagination);
+            $pendingAppointments = Appointment::reservedDoctor()->latest()->paginate($pagination, ['*'], 'pending_page');
                 
-            $oldAppointments = Appointment::completedDoctor()->latest()->paginate($this->pagination);
+            $oldAppointments = Appointment::completedDoctor()->latest()->paginate($pagination, ['*'], 'old_page');
                 
         } elseif ($role == 'patient') {
             //Patients
-            $confirmedAppointments = Appointment::confirmedPatient()->latest()->paginate($this->pagination);
+            $confirmedAppointments = Appointment::confirmedPatient()->latest()->paginate($pagination, ['*'], 'confirmed_page');
                 
-            $pendingAppointments = Appointment::reservedPatient()->latest()->paginate($this->pagination);
-
-            $oldAppointments = Appointment::completedPatient()->latest()->paginate($this->pagination);
+            $pendingAppointments = Appointment::reservedPatient()->latest()->paginate($pagination, ['*'], 'pending_page');
+    
+            $oldAppointments = Appointment::completedPatient()->latest()->paginate($pagination, ['*'], 'old_page');
         }
-
+    
         return [
             'confirmedAppointments' => $confirmedAppointments, 
             'pendingAppointments' => $pendingAppointments, 
@@ -50,7 +51,7 @@ class AppointmentServices{
             'role' => $role
         ];
     }
-
+    
     public function createSchedule(ScheduleServiceInterface $scheduleServiceInterface){
         $specialties = Specialty::all();
         $specialtyId = old('specialty_id');
