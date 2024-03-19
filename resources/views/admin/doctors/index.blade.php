@@ -67,7 +67,7 @@
                                 @endslot
 
                                 @slot('funConfirm')
-                                    <button type="submit"class="btn btn-danger btn-sm" title="Eliminar"><i
+                                    <button type="submit"class="btn btn-danger btn-sm btn-delete" title="Eliminar"><i
                                             class="fas fa-trash"></i></button>
                                 @endslot
                             @endcomponent

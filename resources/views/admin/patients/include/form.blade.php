@@ -105,4 +105,4 @@
 
 
 
-<button type="submit" class="btn btn-sm btn-primary">{{ $patient->id > 0 ? 'Actualizar' : 'Guardar'}}</button>
+<button type="submit" class="btn btn-primary">{{ $patient->id > 0 ? 'Actualizar' : 'Guardar'}}</button>

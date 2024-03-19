@@ -127,7 +127,7 @@
 </div>
 
 
-<button type="submit" class="btn btn-sm btn-primary">{{ $doctor->id > 0 ? 'Actualizar' : 'Guardar' }}</button>
+<button type="submit" class="btn btn-primary">{{ $doctor->id > 0 ? 'Actualizar' : 'Guardar' }}</button>
 
 
 

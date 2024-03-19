@@ -52,7 +52,8 @@
                                 @endslot
 
                                 @slot('funConfirm')
-                                    <button type="submit"class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                    <button type="submit"class="btn btn-danger btn-sm btn-delete" title="Eliminar"><i
+                                            class="fas fa-trash"></i></button>
                                 @endslot
                             @endcomponent
 
@@ -68,11 +69,6 @@
         @endslot
     @endcomponent
     @push('scripts')
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
         @include('admin.partials.sweetAlert2')
     @endpush
 @endsection

@@ -15,4 +15,4 @@
     <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descripción">{{ old('description', $specialty->description) }}</textarea>
 </div>
 
-<button type="submit" class="btn btn-sm btn-primary">{{ $specialty->id > 0 ? 'Actualizar' : 'Guardar' }}</button>
+<button type="submit" class="btn btn btn-primary">{{ $specialty->id > 0 ? 'Actualizar' : 'Guardar' }}</button>

@@ -1,9 +1,10 @@
 <script>
-    $('#formData').on('submit', function(e) {
+    $('.btn-delete').on('click', function(e) {
         e.preventDefault();
+        var form = $(this).closest('form');
         Swal.fire({
             title: "CONFIRMAR",
-            text: "CONFIRMAS ELIMINAR EL REGISTRO",
+            text: "¿Confirma que desea eliminar el registro?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#5e72e4",
@@ -12,8 +13,9 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.submit()
+                form.submit();
             }
         });
-    })
+    });
 </script>
+

@@ -1,11 +1,9 @@
-<div class="card-header border-0">
-    <div class="row align-items-center">
-        <div class="col">
-            <h3 class="mb-0">Crear Paciente</h3>
-        </div>
-        <div class="col text-right">
-            <a href="{{ route('patients.index') }}" class="btn btn-sm btn-success">Regresar</a>
-            <i class="fas fa-chevron-left"></i>
-        </div>
-    </div>
-</div>
+@component('components.header-create')
+    @slot('nameComponente')
+        {{ $patient->id > 0 ? 'Editar ' : 'Crear ' }} Paciente
+    @endslot
+
+    @slot('routeIndex')
+        {{ route('patients.index') }}
+    @endslot
+@endcomponent

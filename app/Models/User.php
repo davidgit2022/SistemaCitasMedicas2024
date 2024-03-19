@@ -66,11 +66,11 @@ class User extends Authenticatable
         $this->attributes['name'] = strtolower($value);
     }
 
-    /* public function getFormatLastNameAttribute()
+    public function getFormatLastNameAttribute()
     {
         $lastName = $this->attributes['last_name'];
         return ucfirst($lastName);
-    } */
+    }
 
     public function setLastNameAttribute($value)
     {
