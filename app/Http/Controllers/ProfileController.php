@@ -37,8 +37,8 @@ class ProfileController extends Controller
         
         $user = auth()->user();
 
-               
         if ($request->hasFile('photo')) {
+      
 
             $fileName = uniqid() . '_.' . $request->photo->extension();
             $request->photo->storeAs('public/img/profiles', $fileName);

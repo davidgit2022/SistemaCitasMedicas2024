@@ -12,6 +12,6 @@ class PatientsExport implements FromCollection
     */
     public function collection()
     {
-        return User::patient()->get();
+        return User::patients()->get();
     }
 }

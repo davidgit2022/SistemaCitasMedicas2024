@@ -25,6 +25,6 @@
 </li>
 <li class="nav-item">
     <a class="nav-link " href="{{ route('specialties.import')}}">
-        <i class="far fa-file-alt"></i>&nbsp;Importar Documentos
+        <i class="fas fa-file-excel text-info"></i></i>&nbsp;Importar Documentos
     </a>
 </li>

@@ -77,7 +77,7 @@ class PatientController extends Controller
 
     public function exportListPatients() 
     {
-        $fileName = 'List patients:' . date('Y-m-d H-i-s') . '.xlsx';
+        $fileName = 'Lists patients:' . date('Y-m-d H-i-s') . '.xlsx';
         return Excel::download(new PatientsExport, $fileName);
     }
 }
